@@ -1,12 +1,21 @@
 import { getFormattedDate } from '../../../shared/utils/PostUtils';
+import {
+  BlogPostHeaderTagItem,
+  BlogPostHeaderTagItemProps,
+} from './BlogPostHeaderTagItem';
 import '../css/BlogPostHeader.css';
 
 type BlogPostHeaderProps = {
   title: string;
   creationDate: number;
   estimatedTimeToRead: number;
-  tagList: string[];
+  tagList: BlogPostHeaderTag[];
   thumbnailUrl: string;
+};
+
+type BlogPostHeaderTag = {
+  tagId: number;
+  tagProps: BlogPostHeaderTagItemProps;
 };
 
 function BlogPostHeader({
@@ -27,10 +36,14 @@ function BlogPostHeader({
       <div className="BlogPostHeader-description">
         {`${getFormattedDate(creationDate)} \u00B7 ${estimatedTimeToRead} min`}
       </div>
-      {/*TODO: Show header information*/}
+      <div>
+        {tagList.map((tag) => (
+          <BlogPostHeaderTagItem {...tag.tagProps} key={tag.tagId} />
+        ))}
+      </div>
     </div>
   );
 }
 
 export { BlogPostHeader };
-export type { BlogPostHeaderProps };
+export type { BlogPostHeaderProps, BlogPostHeaderTag };
