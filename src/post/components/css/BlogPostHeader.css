@@ -1,5 +1,6 @@
 .BlogPostHeader {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 
   margin-top: 50px;
@@ -8,4 +9,11 @@
 
 .BlogPostHeader-thumbnail {
   width: 100%;
+}
+
+.BlogPostHeader-title {
+  font-size: 60px;
+  font-weight: 600;
+
+  margin-top: 44px;
 }

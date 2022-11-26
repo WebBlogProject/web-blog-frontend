@@ -22,6 +22,7 @@ function BlogPostHeader({
         src={thumbnailUrl}
         alt={`${title}_thumbnail`}
       />
+      <div className="BlogPostHeader-title">{title}</div>
       {/*TODO: Show header information*/}
     </div>
   );
