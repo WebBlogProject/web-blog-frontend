@@ -1,0 +1,11 @@
+.BlogPostHeader {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 50px;
+  padding: 0% 10% 0% 10%;
+}
+
+.BlogPostHeader-thumbnail {
+  width: 100%;
+}

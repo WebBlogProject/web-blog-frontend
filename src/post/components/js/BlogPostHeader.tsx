@@ -1,3 +1,5 @@
+import '../css/BlogPostHeader.css';
+
 type BlogPostHeaderProps = {
   title: string;
   creationDate: number;
@@ -13,7 +15,16 @@ function BlogPostHeader({
   tagList,
   thumbnailUrl,
 }: BlogPostHeaderProps) {
-  return <>{/*TODO: Show header information*/}</>;
+  return (
+    <div className="BlogPostHeader">
+      <img
+        className="BlogPostHeader-thumbnail"
+        src={thumbnailUrl}
+        alt={`${title}_thumbnail`}
+      />
+      {/*TODO: Show header information*/}
+    </div>
+  );
 }
 
 export { BlogPostHeader };
