@@ -1,3 +1,4 @@
+import { getFormattedDate } from '../../../shared/utils/PostUtils';
 import '../css/BlogPostHeader.css';
 
 type BlogPostHeaderProps = {
@@ -23,6 +24,9 @@ function BlogPostHeader({
         alt={`${title}_thumbnail`}
       />
       <div className="BlogPostHeader-title">{title}</div>
+      <div className="BlogPostHeader-description">
+        {`${getFormattedDate(creationDate)} \u00B7 ${estimatedTimeToRead} min`}
+      </div>
       {/*TODO: Show header information*/}
     </div>
   );
