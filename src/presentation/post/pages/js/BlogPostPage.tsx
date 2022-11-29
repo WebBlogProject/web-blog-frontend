@@ -2,7 +2,7 @@ import {
   BlogPostHeader,
   BlogPostHeaderProps,
 } from '../../components/js/BlogPostHeader';
-import sampleImage from '../../../assets/headerSampleImage.png';
+import sampleImage from '../../../../assets/headerSampleImage.png';
 
 function BlogPostPage() {
   // TODO : Temporary prop data to show header.

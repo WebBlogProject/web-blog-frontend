@@ -1,4 +1,4 @@
-import { BlogPostPage } from './post/pages/js/BlogPostPage';
+import { BlogPostPage } from './presentation/post/pages/js/BlogPostPage';
 
 function App() {
   return (
