@@ -1,7 +1,7 @@
 import {
   BlogPostHeader,
   BlogPostHeaderProps,
-} from '../../components/js/BlogPostHeader';
+} from '../../components/ts/BlogPostHeader';
 import sampleImage from '../../../../assets/headerSampleImage.png';
 
 function BlogPostPage() {
