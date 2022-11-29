@@ -1,0 +1,26 @@
+.BlogPostHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin-top: 50px;
+  padding: 0% 10% 0% 10%;
+}
+
+.BlogPostHeader-thumbnail {
+  width: 100%;
+}
+
+.BlogPostHeader-title {
+  font-size: 60px;
+  font-weight: 600;
+
+  margin-top: 44px;
+}
+
+.BlogPostHeader-description {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 24px;
+
+  margin-top: 12px;
+}
