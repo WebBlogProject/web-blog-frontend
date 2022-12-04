@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../css/BlogHeaderSearchBar.css"
 
 function BlogHeaderSearchBar() {
     const [query, setQuery] = useState("");
