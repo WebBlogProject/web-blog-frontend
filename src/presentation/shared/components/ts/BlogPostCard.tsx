@@ -1,4 +1,4 @@
-//TODO import css
+import '../css/BlogPostCard.css';
 
 import { getFormattedDate } from '../../utils/PostUtils';
 
