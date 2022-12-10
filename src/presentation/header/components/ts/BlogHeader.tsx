@@ -1,23 +1,15 @@
 import { BlogHeaderSearchBar } from "./BlogHeaderSearchBar";
 import "../css/BlogHeader.css"
 
-type BlogHeaderProps = {
-    blogName: string;
-}
+const blogName = "Blog Name"
 
-function BlogHeader({blogName}: BlogHeaderProps) {
+function BlogHeader() {
     return (
     <div className="BlogHeader">
-        <BlogName blogName={blogName} />
+        <div className="BlogName">{blogName}</div>
         <BlogHeaderSearchBar />
     </div>
     );
-}
-
-function BlogName({blogName}: BlogHeaderProps) {
-    return (
-        <div className="BlogName">{blogName}</div>
-    )
 }
 
 export { BlogHeader };

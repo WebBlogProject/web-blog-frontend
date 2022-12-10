@@ -5,11 +5,13 @@ import loupeImage from "../../../../assets/loupe.png"
 function BlogHeaderSearchBar() {
     const [query, setQuery] = useState("");
 
-    const onSubmitSearch = (e: React.KeyboardEvent<HTMLElement>) => {
-        /* TODO: Impelemnt search */
-
+    const searchIfEnter = (e: React.KeyboardEvent<HTMLElement>) => {
+        if (e.key !== "Enter") {
+            return
+        }
         // print query if user taps enter
         if (e.key === "Enter") {
+            /* TODO: Impelemnt search */
             console.log(query)
         } 
     }
@@ -21,8 +23,8 @@ function BlogHeaderSearchBar() {
 
     return (
         <div className="BlogHeaderSearchBar">
-            <input className="BlogHeaderSearchBar-loupe" type="image" src={loupeImage} alt={"loupeImgUrl"} onClick={onClickButton}/>
-            <input className="BlogHeaderSearchBar-input" type="search" onChange={(e)=>setQuery(e.target.value)} onKeyPress={onSubmitSearch} value={query}/>
+            <input className="BlogHeaderSearchBar-loupe" type="image" src={loupeImage} alt="Search Button" onClick={onClickButton}/>
+            <input className="BlogHeaderSearchBar-input" type="search" onChange={(e)=>setQuery(e.target.value)} onKeyPress={searchIfEnter} value={query}/>
         </div>
     );
 }
