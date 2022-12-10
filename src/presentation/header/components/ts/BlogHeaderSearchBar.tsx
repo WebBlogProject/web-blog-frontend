@@ -19,7 +19,7 @@ function BlogHeaderSearchBar() {
     [query]
   );
 
-  const onClickButton = useCallback(() => {
+  const onClickSearchButton = useCallback(() => {
     /* TODO: Impelemnt search */
     console.log("click button");
   }, []);
@@ -31,7 +31,7 @@ function BlogHeaderSearchBar() {
         type="image"
         src={loupeImage}
         alt="Search Button"
-        onClick={onClickButton}
+        onClick={onClickSearchButton}
       />
       <input
         className="BlogHeaderSearchBar-input"
