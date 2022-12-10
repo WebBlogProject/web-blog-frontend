@@ -10,11 +10,8 @@ function BlogHeaderSearchBar() {
       if (e.key !== "Enter") {
         return;
       }
-      // print query if user taps enter
-      if (e.key === "Enter") {
-        /* TODO: Impelemnt search */
-        console.log(query);
-      }
+      /* TODO: Impelemnt search */
+      console.log(query);
     },
     [query]
   );
