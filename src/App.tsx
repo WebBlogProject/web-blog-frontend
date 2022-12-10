@@ -1,10 +1,10 @@
-import { BlogHeader } from './presentation/header/components/ts/BlogHeader';
-import { BlogPostPage } from './presentation/post/pages/ts/BlogPostPage';
+import { BlogHeader } from "./presentation/header/components/ts/BlogHeader";
+import { BlogPostPage } from "./presentation/post/pages/ts/BlogPostPage";
 
 function App() {
   return (
     <div>
-      <BlogHeader/>
+      <BlogHeader />
       <BlogPostPage />
     </div>
   );

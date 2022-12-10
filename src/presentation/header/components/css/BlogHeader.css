@@ -1,8 +1,8 @@
 .BlogHeader {
-    display:flex;
-    flex-direction:row;
+  display: flex;
+  flex-direction: row;
 }
 
 .BlogName {
-    margin-left: 50%;
+  margin-left: 50%;
 }

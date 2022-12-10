@@ -1,16 +1,16 @@
 .BlogHeaderSearchBar {
-    margin: 3px;
-    margin-left: auto;
-    flex-direction:row;
-    border: 1px solid;
+  margin: 3px;
+  margin-left: auto;
+  flex-direction: row;
+  border: 1px solid;
 }
 
 .BlogHeaderSearchBar-loupe {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 .BlogHeaderSearchBar-input {
-    vertical-align: middle;
-    border: 0;
-    outline: 0;
+  vertical-align: middle;
+  border: 0;
+  outline: 0;
 }

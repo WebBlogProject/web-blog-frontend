@@ -1,15 +1,15 @@
 import { BlogHeaderSearchBar } from "./BlogHeaderSearchBar";
-import "../css/BlogHeader.css"
+import "../css/BlogHeader.css";
 
-const blogName = "Blog Name"
+const blogName = "Blog Name";
 
 function BlogHeader() {
-    return (
+  return (
     <div className="BlogHeader">
-        <div className="BlogName">{blogName}</div>
-        <BlogHeaderSearchBar />
+      <div className="BlogName">{blogName}</div>
+      <BlogHeaderSearchBar />
     </div>
-    );
+  );
 }
 
 export { BlogHeader };
