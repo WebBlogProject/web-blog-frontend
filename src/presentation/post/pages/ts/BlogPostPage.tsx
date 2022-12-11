@@ -5,16 +5,11 @@ import {
 } from "../../components/ts/BlogPostHeader";
 import sampleImage from "../../../../assets/headerSampleImage.png";
 
-export function loader({ params }: any) {
-  return params.id;
-}
-
 function BlogPostPage() {
   // TODO : Temporary prop data to show header.
   // We need to replace it to redux data.
-  const postId = useLoaderData();
   const testProps: BlogPostHeaderProps = {
-    title: "postId: " + postId,
+    title: "postId: " + useLoaderData(),
     creationDate: Date.now(),
     estimatedTimeToRead: 10,
     tagList: [
