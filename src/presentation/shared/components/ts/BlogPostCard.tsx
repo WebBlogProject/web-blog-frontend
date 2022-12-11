@@ -19,9 +19,10 @@ function BlogPostCard({
     <div className="Post-card">
       <img src={thumbnailUrl} alt={`${title}_thumbnail`} />
       <div className="Card-content">
-        <div>{getFormattedDate(creationDate)}</div>
         <h3>{title}</h3>
-        <div>{estimateTimedToRead}min</div>
+        <div>
+          {getFormattedDate(creationDate)} · {estimateTimedToRead}min
+        </div>
       </div>
     </div>
   );
