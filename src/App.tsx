@@ -1,7 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { BlogHeader } from "./presentation/header/components/ts/BlogHeader";
-import { BlogPostPage } from "./presentation/post/pages/ts/BlogPostPage";
+import {
+  BlogPostPage,
+  loader as postLoader,
+} from "./presentation/post/pages/ts/BlogPostPage";
 import { BlogHomePostList } from "./presentation/home/components/ts/BlogHomePostList";
+import { getPositionOfLineAndCharacter } from "typescript";
 
 const router = createBrowserRouter([
   {
@@ -9,8 +13,9 @@ const router = createBrowserRouter([
     element: <BlogHomePostList />,
   },
   {
-    path: "/post",
+    path: "/post/:id",
     element: <BlogPostPage />,
+    loader: postLoader,
   },
 ]);
 
