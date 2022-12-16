@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import "../css/BlogHeaderSearchBar.css";
-import loupeImage from "../../../../assets/loupe.png";
+import loupeImage from "../../../../assets/loupeSmall.png";
 
 function BlogHeaderSearchBar() {
   const [query, setQuery] = useState("");
