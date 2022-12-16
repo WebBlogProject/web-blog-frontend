@@ -5,9 +5,12 @@ const blogName = "Blog Name";
 
 function BlogHeader() {
   return (
-    <div className="BlogHeader">
-      <div className="BlogName">{blogName}</div>
-      <BlogHeaderSearchBar />
+    <div>
+      <div className="BlogHeader">
+        <div className="BlogName">{blogName}</div>
+        <BlogHeaderSearchBar />
+      </div>
+      <hr />
     </div>
   );
 }
