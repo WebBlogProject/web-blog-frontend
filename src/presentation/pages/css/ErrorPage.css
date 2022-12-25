@@ -1,20 +1,15 @@
-.loupe-container {
+.ErrorPage-NoItemIcon {
   vertical-align: middle;
-  margin-top: 10vh;
-  margin-right: auto;
-  margin-left: auto;
+  margin: 10vh auto 0 auto;
   width: 30vw;
   height: 30vh;
 }
 
-.loupe-container .loupe {
+.ErrorPage-NoItemIcon img {
   object-fit: contain;
 }
 
-.msg {
-  margin-top: 1vh;
-  margin-bottom: 1vh;
-  margin-right: auto;
-  margin-left: auto;
+.ErrorPage-Description {
+  margin: 1vh auto 1vh auto;
   text-align: center;
 }

@@ -8,10 +8,10 @@ type ErrorPageProps = {
 function ErrorPage({ msg }: ErrorPageProps) {
   return (
     <div>
-      <div className="loupe-container">
-        <img className="loupe" src={loupeImage} alt={'No item exist'}></img>
+      <div className="ErrorPage-NoItemIcon">
+        <img src={loupeImage} alt="No item exist"></img>
       </div>
-      <div className="msg">{msg}</div>
+      <div className="ErrorPage-Description">{msg}</div>
     </div>
   );
 }

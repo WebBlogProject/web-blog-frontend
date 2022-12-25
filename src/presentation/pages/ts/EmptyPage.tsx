@@ -8,10 +8,10 @@ type EmptyPageProps = {
 function EmptyPage({ msg }: EmptyPageProps) {
   return (
     <div>
-      <div className="loupe-container">
-        <img className="loupe" src={loupeImage} alt={'No item exist'}></img>
+      <div className="EmptyPage-NoItemIcon">
+        <img src={loupeImage} alt="No item exist"></img>
       </div>
-      <div className="msg">{msg}</div>
+      <div className="EmptyPage-Description">{msg}</div>
     </div>
   );
 }
