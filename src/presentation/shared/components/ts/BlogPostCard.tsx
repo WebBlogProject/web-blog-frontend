@@ -5,14 +5,14 @@ import { getFormattedDate } from '../../utils/PostUtils';
 type BlogPostCardProps = {
   title: string;
   creationDate: number;
-  estimateTimedToRead: number;
+  estimatedTimeToRead: number;
   thumbnailUrl: string;
 };
 
 function BlogPostCard({
   title,
   creationDate,
-  estimateTimedToRead,
+  estimatedTimeToRead,
   thumbnailUrl,
 }: BlogPostCardProps) {
   return (
@@ -21,7 +21,7 @@ function BlogPostCard({
       <div className="Card-content">
         <h3>{title}</h3>
         <div>
-          {getFormattedDate(creationDate)} · {estimateTimedToRead}min
+          {getFormattedDate(creationDate)} · {estimatedTimeToRead}min
         </div>
       </div>
     </div>

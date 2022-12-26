@@ -1,16 +1,23 @@
-/* temporary test page for BlogPostCard */
 import '../css/BlogHomePostList.css';
-import { BlogPostCard } from '../../../shared/components/ts/BlogPostCard';
+import {
+  BlogPostCard,
+  BlogPostCardProps,
+} from '../../../shared/components/ts/BlogPostCard';
 import { useSelector } from 'react-redux';
 import { selectPosts } from '../../../../application/redux/HomePosts/homePostsSlice';
-import { simplePostTypeToHomePost } from '../../../../application/api/mappers/simplePostTypeToHomePost';
+import { convertToHomePost } from '../../../../application/mappers/postMapper';
+
+type BlogHomePost = {
+  id: number;
+  postCardProps: BlogPostCardProps;
+};
 
 function BlogHomePostList() {
-  const posts: any[] = useSelector(selectPosts).map(simplePostTypeToHomePost);
+  const posts: BlogHomePost[] = useSelector(selectPosts).map(convertToHomePost);
 
   return (
     <div className="Card-container">
-      {posts.map((post: any) => (
+      {posts.map((post: BlogHomePost) => (
         <BlogPostCard {...post.postCardProps} key={post.id} />
       ))}
     </div>

@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { simplePostType } from '../../types/simplePostType';
+import { Post } from '../../types/Post';
 import { RootState } from '../store';
 
 //temporary initial state
-const initialState: simplePostType[] = [
+const initialState: Post[] = [
   {
     id: 1,
     title: 'searchResultPost',
     creationDate: Date.now(),
-    estimateTimedToRead: 20,
+    estimatedTimeToRead: 20,
     thumbnailUrl: '',
     tagList: [
       {
