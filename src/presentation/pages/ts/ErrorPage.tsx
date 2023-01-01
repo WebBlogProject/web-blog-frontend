@@ -1,6 +1,22 @@
-function ErrorPage() {
-  // temporary implementation
-  return <div>"일시적인 오류가 발생했습니다"</div>;
+import loupeImage from '../../../assets/loupeBig.png';
+import '../css/ErrorPage.css';
+
+type ErrorPageProps = {
+  msg: string;
+};
+
+function ErrorPage({ msg }: ErrorPageProps) {
+  return (
+    <div>
+      <img
+        src={loupeImage}
+        className="ErrorPage-noItemIcon"
+        alt="No item exist"
+      />
+      <div className="ErrorPage-description">{msg}</div>
+    </div>
+  );
 }
 
 export { ErrorPage };
+export type { ErrorPageProps };

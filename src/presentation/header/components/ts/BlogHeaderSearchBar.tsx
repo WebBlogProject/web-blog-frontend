@@ -1,13 +1,13 @@
-import React, { useState, useCallback } from "react";
-import "../css/BlogHeaderSearchBar.css";
-import loupeImage from "../../../../assets/loupe.png";
+import React, { useState, useCallback } from 'react';
+import '../css/BlogHeaderSearchBar.css';
+import loupeImage from '../../../../assets/loupeSmall.png';
 
 function BlogHeaderSearchBar() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
 
   const searchIfEnter = useCallback(
     (e: React.KeyboardEvent<HTMLElement>) => {
-      if (e.key !== "Enter") {
+      if (e.key !== 'Enter') {
         return;
       }
       /* TODO: Impelemnt search */
@@ -18,7 +18,7 @@ function BlogHeaderSearchBar() {
 
   const onClickSearchButton = useCallback(() => {
     /* TODO: Impelemnt search */
-    console.log("click button");
+    console.log('click button');
   }, []);
 
   return (
