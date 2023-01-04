@@ -3,9 +3,9 @@ import {
   BlogPostCard,
   BlogPostCardProps,
 } from '../../../shared/components/ts/BlogPostCard';
-import { useSelector } from 'react-redux';
-import { selectPosts } from '../../../../application/redux/HomePosts/homePostsSlice';
 import { convertToHomePost } from '../../../../application/mappers/postMapper';
+import { useGetPostsQuery } from '../../../../application/redux/api/apiSlice';
+import { Post } from '../../../../application/types/Post';
 
 type BlogHomePost = {
   id: number;
@@ -13,8 +13,13 @@ type BlogHomePost = {
 };
 
 function BlogHomePostList() {
-  const posts: BlogHomePost[] = useSelector(selectPosts).map(convertToHomePost);
+  const { data, isLoading } = useGetPostsQuery();
 
+  if (isLoading) {
+    return <div> loading ... </div>;
+  }
+
+  const posts: BlogHomePost[] = (data as Post[]).map(convertToHomePost);
   return (
     <div className="Card-container">
       {posts.map((post: BlogHomePost) => (
