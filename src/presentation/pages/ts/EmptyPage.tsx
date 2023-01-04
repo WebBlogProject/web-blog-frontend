@@ -1,6 +1,22 @@
-function EmptyPage() {
-  // temporary implementation
-  return <div>"보여줄 아이템이 없습니다"</div>;
+import loupeImage from '../../../assets/loupeBig.png';
+import '../css/EmptyPage.css';
+
+type EmptyPageProps = {
+  msg: string;
+};
+
+function EmptyPage({ msg }: EmptyPageProps) {
+  return (
+    <div>
+      <img
+        src={loupeImage}
+        className="EmptyPage-noItemIcon"
+        alt="No item exist"
+      />
+      <div className="EmptyPage-description">{msg}</div>
+    </div>
+  );
 }
 
 export { EmptyPage };
+export type { EmptyPageProps };

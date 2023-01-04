@@ -1,13 +1,14 @@
-import { BlogHeaderSearchBar } from "./BlogHeaderSearchBar";
-import "../css/BlogHeader.css";
+import { BlogHeaderSearchBar } from './BlogHeaderSearchBar';
+import '../css/BlogHeader.css';
 
-const blogName = "Blog Name";
+const blogName = 'Blog Name';
 
 function BlogHeader() {
   return (
-    <div className="BlogHeader">
+    <div>
       <div className="BlogName">{blogName}</div>
       <BlogHeaderSearchBar />
+      <hr />
     </div>
   );
 }

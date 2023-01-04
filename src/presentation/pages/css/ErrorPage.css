@@ -1,0 +1,12 @@
+.ErrorPage-noItemIcon {
+  margin: 10vh auto 0 auto;
+  width: 30vw;
+  height: 30vh;
+  display: block;
+  object-fit: contain;
+}
+
+.ErrorPage-description {
+  margin: 1vh auto 1vh auto;
+  text-align: center;
+}
