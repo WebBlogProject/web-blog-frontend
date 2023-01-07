@@ -1,6 +1,7 @@
 import { Post } from '../types/Post';
+import { PostPreview } from '../types/PostPreview';
 
-const convertToHomePost = (post: Post) => ({
+const convertToHomePost = (post: Post): PostPreview => ({
   id: post.id,
   postCardProps: {
     title: post.title,
