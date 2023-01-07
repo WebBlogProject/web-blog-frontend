@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Post } from '../../types/Post';
 
-export const apiSlice = createApi({
+const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
     baseUrl: '/mock',
@@ -13,4 +13,5 @@ export const apiSlice = createApi({
   }),
 });
 
+export { apiSlice };
 export const { useGetPostsQuery } = apiSlice;
