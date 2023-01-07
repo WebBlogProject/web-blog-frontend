@@ -5,6 +5,7 @@ import {
 } from '../../../shared/components/ts/BlogPostCard';
 import { convertToHomePost } from '../../../../application/mappers/postMapper';
 import { useGetPostsQuery } from '../../../../application/redux/api/apiSlice';
+import { useMemo } from 'react';
 import { Post } from '../../../../application/types/Post';
 
 type BlogHomePost = {
@@ -13,20 +14,24 @@ type BlogHomePost = {
 };
 
 function BlogHomePostList() {
-  const { data, isLoading } = useGetPostsQuery();
+  const { data, isSuccess } = useGetPostsQuery();
 
-  if (isLoading) {
+  const posts: BlogHomePost[] = useMemo(() => {
+    const emptyArray: BlogHomePost[] = [];
+    return data?.map(convertToHomePost) ?? emptyArray;
+  }, [data]);
+
+  if (isSuccess) {
+    return (
+      <div className="Card-container">
+        {posts.map((post: BlogHomePost) => (
+          <BlogPostCard {...post.postCardProps} key={post.id} />
+        ))}
+      </div>
+    );
+  } else {
     return <div> loading ... </div>;
   }
-
-  const posts: BlogHomePost[] = (data as Post[]).map(convertToHomePost);
-  return (
-    <div className="Card-container">
-      {posts.map((post: BlogHomePost) => (
-        <BlogPostCard {...post.postCardProps} key={post.id} />
-      ))}
-    </div>
-  );
 }
 
 export { BlogHomePostList };
