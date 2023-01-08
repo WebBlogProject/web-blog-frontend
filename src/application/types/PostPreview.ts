@@ -1,8 +1,11 @@
-import { BlogPostCardProps } from '../../presentation/shared/components/ts/BlogPostCard';
-
 type PostPreview = {
   id: number;
-  postCardProps: BlogPostCardProps;
+  postCardProps: {
+    title: string;
+    creationDate: number;
+    estimatedTimeToRead: number;
+    thumbnailUrl: string;
+  };
 };
 
 export type { PostPreview };
