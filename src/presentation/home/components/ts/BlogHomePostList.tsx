@@ -17,7 +17,13 @@ function BlogHomePostList() {
     return (
       <div className="Card-container">
         {posts.map((post: PostPreview) => (
-          <BlogPostCard {...post.postCardProps} key={post.id} />
+          <BlogPostCard
+            title={post.title}
+            creationDate={post.creationDate}
+            estimatedTimeToRead={post.estimatedTimeToRead}
+            thumbnailUrl={post.thumbnailUrl}
+            key={post.id}
+          />
         ))}
       </div>
     );

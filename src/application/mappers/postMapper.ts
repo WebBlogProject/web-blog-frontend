@@ -3,12 +3,10 @@ import { PostPreview } from '../types/PostPreview';
 
 const convertToPostPreview = (post: Post): PostPreview => ({
   id: post.id,
-  postCardProps: {
-    title: post.title,
-    creationDate: post.creationDate,
-    estimatedTimeToRead: post.estimatedTimeToRead,
-    thumbnailUrl: post.thumbnailUrl,
-  },
+  title: post.title,
+  creationDate: post.creationDate,
+  estimatedTimeToRead: post.estimatedTimeToRead,
+  thumbnailUrl: post.thumbnailUrl,
 });
 
 export { convertToPostPreview };
