@@ -1,6 +1,6 @@
 type Tag = {
   tagId: number;
-  tagName: String;
+  tagName: string;
 };
 
 export type { Tag };
