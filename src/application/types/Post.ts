@@ -7,6 +7,7 @@ type Post = {
   estimatedTimeToRead: number;
   thumbnailUrl: string;
   tagList: Tag[];
+  bodyContent: string;
 };
 
 export type { Post };

@@ -9,5 +9,6 @@
       "tagId": 1,
       "tagName": "tag1"
     }
-  ]
+  ],
+  "bodyContent": "## Blog First Post"
 }
