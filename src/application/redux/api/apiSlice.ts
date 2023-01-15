@@ -8,7 +8,7 @@ const apiSlice = createApi({
   }),
   endpoints: (builder) => ({
     getPostHeaders: builder.query<PostHeaderData[], void>({
-      query: () => '/posts.json',
+      query: () => '/postHeaders.json',
     }),
   }),
 });
