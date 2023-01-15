@@ -1,12 +1,12 @@
 import '../css/BlogHomePostList.css';
 import { BlogPostCard } from '../../../shared/components/ts/BlogPostCard';
-import { convertToPostPreview } from '../../../../application/mappers/postMapper';
-import { useGetPostsQuery } from '../../../../application/redux/api/apiSlice';
+import { convertToPostPreview } from '../../../../application/mappers/postHeaderMappers';
+import { useGetPostHeadersQuery } from '../../../../application/redux/api/apiSlice';
 import { useMemo } from 'react';
 import { PostPreview } from '../../../../application/types/PostPreview';
 
 function BlogHomePostList() {
-  const { data, isSuccess } = useGetPostsQuery();
+  const { data, isSuccess } = useGetPostHeadersQuery();
 
   const posts: PostPreview[] = useMemo(() => {
     const emptyArray: PostPreview[] = [];
