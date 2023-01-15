@@ -1,6 +1,7 @@
 import { useLoaderData } from 'react-router-dom';
 import { useGetPostByIdQuery } from '../../../../application/redux/api/apiSlice';
 import { ErrorPage, ErrorPageProps } from '../../../pages/ts/ErrorPage';
+import { BlogPostBodyContent } from '../../components/ts/BlogPostBodyContent';
 import { BlogPostHeader } from '../../components/ts/BlogPostHeader';
 
 function BlogPostPage() {
@@ -22,6 +23,7 @@ function BlogPostPage() {
           thumbnailUrl={data.thumbnailUrl}
           tagList={data.tagList}
         />
+        <BlogPostBodyContent bodyContent={data.bodyContent} />
       </div>
     );
   } else if (isError) {
