@@ -1,21 +1,14 @@
 import { getFormattedDate } from '../../../shared/utils/PostUtils';
-import {
-  BlogPostHeaderTagItem,
-  BlogPostHeaderTagItemProps,
-} from './BlogPostHeaderTagItem';
+import { BlogPostHeaderTagItem } from './BlogPostHeaderTagItem';
+import { Tag } from '../../../../application/types/Tag';
 import '../css/BlogPostHeader.css';
 
 type BlogPostHeaderProps = {
   title: string;
   creationDate: number;
   estimatedTimeToRead: number;
-  tagList: BlogPostHeaderTag[];
+  tagList: Tag[];
   thumbnailUrl: string;
-};
-
-type BlogPostHeaderTag = {
-  tagId: number;
-  tagProps: BlogPostHeaderTagItemProps;
 };
 
 function BlogPostHeader({
@@ -38,7 +31,7 @@ function BlogPostHeader({
       </div>
       <div>
         {tagList.map((tag) => (
-          <BlogPostHeaderTagItem {...tag.tagProps} key={tag.tagId} />
+          <BlogPostHeaderTagItem tagName={tag.tagName} key={tag.tagId} />
         ))}
       </div>
     </div>
@@ -46,4 +39,4 @@ function BlogPostHeader({
 }
 
 export { BlogPostHeader };
-export type { BlogPostHeaderProps, BlogPostHeaderTag };
+export type { BlogPostHeaderProps };

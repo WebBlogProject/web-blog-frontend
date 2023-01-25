@@ -1,39 +1,36 @@
 import { useLoaderData } from 'react-router-dom';
-import {
-  BlogPostHeader,
-  BlogPostHeaderProps,
-} from '../../components/ts/BlogPostHeader';
-import sampleImage from '../../../../assets/headerSampleImage.png';
+import { useGetPostByIdQuery } from '../../../../application/redux/api/apiSlice';
+import { ErrorPage, ErrorPageProps } from '../../../pages/ts/ErrorPage';
+import { BlogPostBodyContent } from '../../components/ts/BlogPostBodyContent';
+import { BlogPostHeader } from '../../components/ts/BlogPostHeader';
 
 function BlogPostPage() {
-  // TODO : Temporary prop data to show header.
-  // We need to replace it to redux data.
-  const testProps: BlogPostHeaderProps = {
-    title: 'postId: ' + useLoaderData(),
-    creationDate: Date.now(),
-    estimatedTimeToRead: 10,
-    tagList: [
-      {
-        tagId: 1,
-        tagProps: { tagName: 'test1' },
-      },
-      {
-        tagId: 2,
-        tagProps: { tagName: 'test2' },
-      },
-      {
-        tagId: 3,
-        tagProps: { tagName: 'test3' },
-      },
-    ],
-    thumbnailUrl: sampleImage,
+  const errorPageProps: ErrorPageProps = {
+    msg: '포스트 정보를 불러오지 못했습니다.',
   };
 
-  return (
-    <div>
-      <BlogPostHeader {...testProps} />
-    </div>
+  const { data, isSuccess, isError } = useGetPostByIdQuery(
+    useLoaderData() as number
   );
+
+  if (isSuccess) {
+    return (
+      <div>
+        <BlogPostHeader
+          title={data.title}
+          creationDate={data.creationDate}
+          estimatedTimeToRead={data.estimatedTimeToRead}
+          thumbnailUrl={data.thumbnailUrl}
+          tagList={data.tagList}
+        />
+        <BlogPostBodyContent bodyContent={data.bodyContent} />
+      </div>
+    );
+  } else if (isError) {
+    return <ErrorPage msg={errorPageProps.msg} />;
+  } else {
+    return <div> loading ... </div>;
+  }
 }
 
 export { BlogPostPage };

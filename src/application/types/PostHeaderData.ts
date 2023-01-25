@@ -1,13 +1,12 @@
 import { Tag } from './Tag';
 
-type Post = {
+type PostHeaderData = {
   id: number;
   title: string;
   creationDate: number;
   estimatedTimeToRead: number;
   thumbnailUrl: string;
   tagList: Tag[];
-  bodyContent: string;
 };
 
-export type { Post };
+export type { PostHeaderData };

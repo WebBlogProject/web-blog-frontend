@@ -1,7 +1,7 @@
-import { Post } from '../types/Post';
+import { PostHeaderData } from '../types/PostHeaderData';
 import { PostPreview } from '../types/PostPreview';
 
-const convertToPostPreview = (post: Post): PostPreview => ({
+const convertToPostPreview = (post: PostHeaderData): PostPreview => ({
   id: post.id,
   title: post.title,
   creationDate: post.creationDate,
