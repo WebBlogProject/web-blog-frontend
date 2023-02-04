@@ -1,7 +1,7 @@
 [
   {
-    "id": 1,
-    "title": "Blog 1",
+    "id": 7,
+    "title": "Blog 7",
     "creationDate": 1000,
     "estimatedTimeToRead": 3,
     "thumbnailUrl": "someUrl.png",
@@ -13,8 +13,8 @@
     ]
   },
   {
-    "id": 2,
-    "title": "Blog 2",
+    "id": 8,
+    "title": "Blog 8",
     "creationDate": 1000,
     "estimatedTimeToRead": 3,
     "thumbnailUrl": "someUrl.png",
@@ -26,8 +26,8 @@
     ]
   },
   {
-    "id": 3,
-    "title": "Blog 3",
+    "id": 9,
+    "title": "Blog 9",
     "creationDate": 1000,
     "estimatedTimeToRead": 3,
     "thumbnailUrl": "someUrl.png",
@@ -39,8 +39,8 @@
     ]
   },
   {
-    "id": 4,
-    "title": "Blog 4",
+    "id": 10,
+    "title": "Blog 10",
     "creationDate": 1000,
     "estimatedTimeToRead": 3,
     "thumbnailUrl": "someUrl.png",
@@ -52,8 +52,21 @@
     ]
   },
   {
-    "id": 5,
-    "title": "Blog 5",
+    "id": 11,
+    "title": "Blog 11",
+    "creationDate": 1000,
+    "estimatedTimeToRead": 3,
+    "thumbnailUrl": "someUrl.png",
+    "tagList": [
+      {
+        "tagId": 1,
+        "tagName": "tag1"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Blog 12",
     "creationDate": 1000,
     "estimatedTimeToRead": 3,
     "thumbnailUrl": "someUrl.png",
