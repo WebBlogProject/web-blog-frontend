@@ -29,6 +29,10 @@ function BlogHomePostList() {
     return data?.map(convertToPostPreview) ?? emptyArray;
   }, [data]);
 
+  const errorPageProps: ErrorPageProps = {
+    msg: '포스트 목록을 불러오지 못했습니다.',
+  };
+
   if (isSuccess) {
     return (
       <div>
@@ -47,6 +51,8 @@ function BlogHomePostList() {
         <div style={{ height: '1px' }} ref={ref} />
       </div>
     );
+  } else if (isError) {
+    return <ErrorPage msg={errorPageProps.msg} />;
   } else {
     return <div> loading ... </div>;
   }
