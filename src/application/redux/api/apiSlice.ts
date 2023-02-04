@@ -8,8 +8,8 @@ const apiSlice = createApi({
     baseUrl: '/mock',
   }),
   endpoints: (builder) => ({
-    getPostHeaders: builder.query<PostHeaderData[], void>({
-      query: () => '/postHeaders.json',
+    getPostHeaders: builder.query<PostHeaderData[], number>({
+      query: (pageNumber: number) => `/postHeaders/${pageNumber}.json`,
     }),
     getPostById: builder.query<Post, number>({
       query: (id: number) => `/post/${id}.json`,
