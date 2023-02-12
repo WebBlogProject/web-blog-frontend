@@ -6,8 +6,9 @@ import {
   QueryDefinition,
 } from '@reduxjs/toolkit/dist/query';
 import { UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { PostHeaderData } from '../../../application/types/PostHeaderData';
+import { useIntersect } from './useIntersect';
 
 const useFetchPages = (
   usePageQuery: UseQuery<
@@ -23,12 +24,12 @@ const useFetchPages = (
       never,
       PostHeaderData[]
     >
-  >,
-  currentPage: number
+  >
 ) => {
+  const [pageNumber, setPageNumber] = useState(1);
   const [data, setData] = useState<PostHeaderData[]>([]);
-  const currentResult = usePageQuery(currentPage);
-  const nextResult = usePageQuery(currentPage + 1); //Used for next page Existance , Might Change implementation when backend server api is fully implemented.
+  const currentResult = usePageQuery(pageNumber);
+  const nextResult = usePageQuery(pageNumber + 1);
   const isSuccess = currentResult.isSuccess;
   const isLoading = currentResult.isLoading;
   const isError = currentResult.isError;
@@ -38,7 +39,16 @@ const useFetchPages = (
     if (isSuccess) setData((data) => [...data].concat(...currentResult.data));
   }, [isSuccess, currentResult]);
 
-  return { data, isSuccess, isLoading, isError, hasNextResult };
+  const ref = useIntersect(
+    useCallback(
+      async (entry, observer) => {
+        if (hasNextResult && !isLoading) setPageNumber(pageNumber + 1);
+      },
+      [hasNextResult, isLoading, pageNumber]
+    )
+  );
+
+  return { data, isSuccess, isLoading, isError, ref, hasNextResult };
 };
 
 export { useFetchPages };

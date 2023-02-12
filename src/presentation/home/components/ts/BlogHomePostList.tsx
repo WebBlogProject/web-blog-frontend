@@ -9,20 +9,8 @@ import { useFetchPages } from '../../../shared/hooks/useFetchPages';
 import { ErrorPage, ErrorPageProps } from '../../../pages/ts/ErrorPage';
 
 function BlogHomePostList() {
-  const [pageNumber, setPageNumber] = useState(1);
-  const { data, isSuccess, isLoading, isError, hasNextResult } = useFetchPages(
-    useGetPostHeadersQuery,
-    pageNumber
-  );
-
-  const ref = useIntersect(
-    useCallback(
-      async (entry, observer) => {
-        if (hasNextResult && !isLoading) setPageNumber(pageNumber + 1);
-      },
-      [hasNextResult, isLoading, pageNumber]
-    )
-  );
+  const { data, isSuccess, isLoading, isError, ref, hasNextResult } =
+    useFetchPages(useGetPostHeadersQuery);
 
   const posts: PostPreview[] = useMemo(() => {
     const emptyArray: PostPreview[] = [];
@@ -49,6 +37,7 @@ function BlogHomePostList() {
           ))}
         </div>
         <div style={{ height: '1px' }} ref={ref} />
+        {/* if ref attributed tag is shown on the viewport,intersection observer senses it (releated to infinite scroll) */}
       </div>
     );
   } else if (isError) {
