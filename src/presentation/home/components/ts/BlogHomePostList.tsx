@@ -2,15 +2,16 @@ import '../css/BlogHomePostList.css';
 import { BlogPostCard } from '../../../shared/components/ts/BlogPostCard';
 import { convertToPostPreview } from '../../../../application/mappers/postHeaderMappers';
 import { useGetPostHeadersQuery } from '../../../../application/redux/api/apiSlice';
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { PostPreview } from '../../../../application/types/PostPreview';
-import { useIntersect } from '../../../shared/hooks/useIntersect';
 import { useFetchPages } from '../../../shared/hooks/useFetchPages';
 import { ErrorPage, ErrorPageProps } from '../../../pages/ts/ErrorPage';
 
 function BlogHomePostList() {
-  const { data, isSuccess, isLoading, isError, ref, hasNextResult } =
-    useFetchPages(useGetPostHeadersQuery);
+  const { data, isSuccess, isError, ref } = useFetchPages(
+    useGetPostHeadersQuery,
+    1
+  );
 
   const posts: PostPreview[] = useMemo(() => {
     const emptyArray: PostPreview[] = [];

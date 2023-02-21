@@ -6,8 +6,9 @@ import {
   QueryDefinition,
 } from '@reduxjs/toolkit/dist/query';
 import { UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { PostHeaderData } from '../../../application/types/PostHeaderData';
+import { PostHeaderDTO } from '../../../application/types/PostHeaderDTO';
 import { useIntersect } from './useIntersect';
 
 const useFetchPages = (
@@ -22,33 +23,29 @@ const useFetchPages = (
         FetchBaseQueryMeta
       >,
       never,
-      PostHeaderData[]
+      PostHeaderDTO
     >
-  >
+  >,
+  initialPage: number
 ) => {
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState(initialPage);
   const [data, setData] = useState<PostHeaderData[]>([]);
   const currentResult = usePageQuery(pageNumber);
-  const nextResult = usePageQuery(pageNumber + 1);
   const isSuccess = currentResult.isSuccess;
-  const isLoading = currentResult.isLoading;
   const isError = currentResult.isError;
-  const hasNextResult = !nextResult.isError;
 
   useMemo(() => {
-    if (isSuccess) setData((data) => [...data].concat(...currentResult.data));
-  }, [isSuccess, currentResult]);
+    if (currentResult.isSuccess && !currentResult.isFetching)
+      setData((data) => [...data].concat(...currentResult.data.nextPosts));
+  }, [currentResult]);
 
-  const ref = useIntersect(
-    useCallback(
-      async (entry, observer) => {
-        if (hasNextResult && !isLoading) setPageNumber(pageNumber + 1);
-      },
-      [hasNextResult, isLoading, pageNumber]
-    )
-  );
+  const ref = useIntersect(async (entry, observer) => {
+    if (isSuccess && currentResult.data.hasNextPage) {
+      setPageNumber(currentResult.data.nextPage);
+    }
+  });
 
-  return { data, isSuccess, isLoading, isError, ref, hasNextResult };
+  return { data, isSuccess, isError, ref };
 };
 
 export { useFetchPages };
