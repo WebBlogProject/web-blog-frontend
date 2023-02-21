@@ -1,80 +1,84 @@
-[
-  {
-    "id": 25,
-    "title": "Blog 25",
-    "creationDate": 1000,
-    "estimatedTimeToRead": 3,
-    "thumbnailUrl": "someUrl.png",
-    "tagList": [
-      {
-        "tagId": 1,
-        "tagName": "tag1"
-      }
-    ]
-  },
-  {
-    "id": 26,
-    "title": "Blog 26",
-    "creationDate": 1000,
-    "estimatedTimeToRead": 3,
-    "thumbnailUrl": "someUrl.png",
-    "tagList": [
-      {
-        "tagId": 1,
-        "tagName": "tag1"
-      }
-    ]
-  },
-  {
-    "id": 27,
-    "title": "Blog 27",
-    "creationDate": 1000,
-    "estimatedTimeToRead": 3,
-    "thumbnailUrl": "someUrl.png",
-    "tagList": [
-      {
-        "tagId": 1,
-        "tagName": "tag1"
-      }
-    ]
-  },
-  {
-    "id": 28,
-    "title": "Blog 28",
-    "creationDate": 1000,
-    "estimatedTimeToRead": 3,
-    "thumbnailUrl": "someUrl.png",
-    "tagList": [
-      {
-        "tagId": 1,
-        "tagName": "tag1"
-      }
-    ]
-  },
-  {
-    "id": 29,
-    "title": "Blog 29",
-    "creationDate": 1000,
-    "estimatedTimeToRead": 3,
-    "thumbnailUrl": "someUrl.png",
-    "tagList": [
-      {
-        "tagId": 1,
-        "tagName": "tag1"
-      }
-    ]
-  },
-  {
-    "id": 30,
-    "title": "Blog 30",
-    "creationDate": 1000,
-    "estimatedTimeToRead": 3,
-    "thumbnailUrl": "someUrl.png",
-    "tagList": [
-      {
-        "tagId": 1,
-        "tagName": "tag1"
-      }
-    ]
-  }
-]
+{
+  "nextPosts": [
+    {
+      "id": 25,
+      "title": "Blog 25",
+      "creationDate": 1000,
+      "estimatedTimeToRead": 3,
+      "thumbnailUrl": "someUrl.png",
+      "tagList": [
+        {
+          "tagId": 1,
+          "tagName": "tag1"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Blog 26",
+      "creationDate": 1000,
+      "estimatedTimeToRead": 3,
+      "thumbnailUrl": "someUrl.png",
+      "tagList": [
+        {
+          "tagId": 1,
+          "tagName": "tag1"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Blog 27",
+      "creationDate": 1000,
+      "estimatedTimeToRead": 3,
+      "thumbnailUrl": "someUrl.png",
+      "tagList": [
+        {
+          "tagId": 1,
+          "tagName": "tag1"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Blog 28",
+      "creationDate": 1000,
+      "estimatedTimeToRead": 3,
+      "thumbnailUrl": "someUrl.png",
+      "tagList": [
+        {
+          "tagId": 1,
+          "tagName": "tag1"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Blog 29",
+      "creationDate": 1000,
+      "estimatedTimeToRead": 3,
+      "thumbnailUrl": "someUrl.png",
+      "tagList": [
+        {
+          "tagId": 1,
+          "tagName": "tag1"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Blog 30",
+      "creationDate": 1000,
+      "estimatedTimeToRead": 3,
+      "thumbnailUrl": "someUrl.png",
+      "tagList": [
+        {
+          "tagId": 1,
+          "tagName": "tag1"
+        }
+      ]
+    }
+  ],
+  "hasNextPage": false,
+  "nextPage": 6
+}
