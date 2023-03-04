@@ -1,3 +1,4 @@
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import {
   BaseQueryFn,
   FetchArgs,
@@ -6,9 +7,9 @@ import {
   QueryDefinition,
 } from '@reduxjs/toolkit/dist/query';
 import { UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
-import { useMemo, useState } from 'react';
-import { PostHeaderData } from '../../../application/types/PostHeaderData';
+import { useCallback, useEffect, useState } from 'react';
 import { PostHeaderDTO } from '../../../application/types/PostHeaderDTO';
+import { useAppDispatch, useAppSelector } from './reduxHooks';
 import { useIntersect } from './useIntersect';
 
 const useFetchPages = (
@@ -26,24 +27,41 @@ const useFetchPages = (
       PostHeaderDTO
     >
   >,
-  initialPage: number
+  action: ActionCreatorWithPayload<any, any>
 ) => {
-  const [pageNumber, setPageNumber] = useState(initialPage);
-  const [data, setData] = useState<PostHeaderData[]>([]);
+  const data = useAppSelector((state) => state.home);
+
+  const [pageNumber, setPageNumber] = useState(data.pageNumber);
   const currentResult = usePageQuery(pageNumber);
   const isSuccess = currentResult.isSuccess;
   const isError = currentResult.isError;
-
-  useMemo(() => {
-    if (currentResult.isSuccess && !currentResult.isFetching)
-      setData((data) => [...data].concat(...currentResult.data.nextPosts));
-  }, [currentResult]);
+  const dispatch = useAppDispatch();
+  const hasDuplicatePage = useCallback(
+    (postHeaderDTO: PostHeaderDTO) => {
+      if (data.posts.length === 0) return false;
+      else {
+        return data.posts.at(-1)?.id === postHeaderDTO.nextPosts.at(-1)?.id;
+      }
+    },
+    [data]
+  );
 
   const ref = useIntersect(async (entry, observer) => {
     if (isSuccess && currentResult.data.hasNextPage) {
       setPageNumber(currentResult.data.nextPage);
     }
   });
+
+  useEffect(() => {
+    if (currentResult.isSuccess && !hasDuplicatePage(currentResult.data)) {
+      dispatch(
+        action({
+          pageNumber: pageNumber,
+          posts: currentResult.data.nextPosts,
+        })
+      );
+    }
+  }, [currentResult, action, pageNumber, dispatch, hasDuplicatePage]);
 
   return { data, isSuccess, isError, ref };
 };
