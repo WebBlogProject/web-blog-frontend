@@ -6,16 +6,18 @@ import { useMemo } from 'react';
 import { PostPreview } from '../../../../application/types/PostPreview';
 import { useFetchPages } from '../../../shared/hooks/useFetchPages';
 import { ErrorPage, ErrorPageProps } from '../../../pages/ts/ErrorPage';
+import { pageLoaded } from '../../../../application/redux/home/homeSlice';
+import { useAppSelector } from '../../../shared/hooks/reduxHooks';
 
 function BlogHomePostList() {
   const { data, isSuccess, isError, ref } = useFetchPages(
     useGetPostHeadersQuery,
-    1
+    pageLoaded
   );
 
   const posts: PostPreview[] = useMemo(() => {
     const emptyArray: PostPreview[] = [];
-    return data?.map(convertToPostPreview) ?? emptyArray;
+    return data.posts.map(convertToPostPreview) ?? emptyArray;
   }, [data]);
 
   const errorPageProps: ErrorPageProps = {
