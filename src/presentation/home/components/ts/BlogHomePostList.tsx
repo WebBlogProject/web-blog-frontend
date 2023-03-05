@@ -6,18 +6,16 @@ import { useMemo } from 'react';
 import { PostPreview } from '../../../../application/types/PostPreview';
 import { useFetchPages } from '../../../shared/hooks/useFetchPages';
 import { ErrorPage, ErrorPageProps } from '../../../pages/ts/ErrorPage';
-import { pageLoaded } from '../../../../application/redux/home/homeSlice';
-import { useAppSelector } from '../../../shared/hooks/reduxHooks';
+import { loadPostHeaderPage } from '../../../../application/redux/home/homeSlice';
 
 function BlogHomePostList() {
   const { data, isSuccess, isError, ref } = useFetchPages(
     useGetPostHeadersQuery,
-    pageLoaded
+    loadPostHeaderPage
   );
 
   const posts: PostPreview[] = useMemo(() => {
-    const emptyArray: PostPreview[] = [];
-    return data.posts.map(convertToPostPreview) ?? emptyArray;
+    return data.posts.map(convertToPostPreview) ?? [];
   }, [data]);
 
   const errorPageProps: ErrorPageProps = {
@@ -39,8 +37,8 @@ function BlogHomePostList() {
             />
           ))}
         </div>
-        <div style={{ height: '1px' }} ref={ref} />
         {/* if ref attributed tag is shown on the viewport,intersection observer senses it (releated to infinite scroll) */}
+        <div style={{ height: '1px' }} ref={ref} />
       </div>
     );
   } else if (isError) {

@@ -15,7 +15,7 @@ const homeSlice = createSlice({
   name: 'home',
   initialState,
   reducers: {
-    pageLoaded: (state, action) => {
+    loadPostHeaderPage: (state, action) => {
       const { pageNumber, posts } = action.payload;
       return {
         pageNumber: pageNumber,
@@ -26,4 +26,4 @@ const homeSlice = createSlice({
 });
 
 export { homeSlice };
-export const { pageLoaded } = homeSlice.actions;
+export const { loadPostHeaderPage } = homeSlice.actions;
