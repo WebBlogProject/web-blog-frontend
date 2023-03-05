@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 
-type IntersectHandler = (
+type OnIntersectCallBack = (
   entry: IntersectionObserverEntry,
   observer: IntersectionObserver
 ) => void;
 
 const useIntersect = (
-  onIntersect: IntersectHandler,
+  onIntersect: OnIntersectCallBack,
   options?: IntersectionObserverInit
 ) => {
   const callback = useCallback(
@@ -19,13 +19,15 @@ const useIntersect = (
   );
 
   const ref = useRef<HTMLDivElement>(null);
+  const observer = useMemo(() => {
+    return new IntersectionObserver(callback, options);
+  }, [callback, options]);
 
   useEffect(() => {
     if (!ref.current) return;
-    const observer = new IntersectionObserver(callback, options);
     observer.observe(ref.current);
     return () => observer.disconnect();
-  }, [options, callback]);
+  }, [ref, observer]);
 
   return ref;
 };
