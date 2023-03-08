@@ -18,4 +18,4 @@ const apiSlice = createApi({
 });
 
 export { apiSlice };
-export const { useGetPostHeadersQuery, useGetPostByIdQuery } = apiSlice;
+export const { useLazyGetPostHeadersQuery, useGetPostByIdQuery } = apiSlice;

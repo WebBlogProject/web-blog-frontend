@@ -6,14 +6,14 @@ import {
   FetchBaseQueryMeta,
   QueryDefinition,
 } from '@reduxjs/toolkit/dist/query';
-import { UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
-import { useCallback, useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from './reduxHooks';
+import { UseLazyQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
+import { useEffect } from 'react';
 import { PostHeaderPage } from '../../../application/types/PostHeaderPage';
+import { useAppDispatch } from './reduxHooks';
 import { useIntersect } from './useIntersect';
 
 const useFetchPages = (
-  usePageQuery: UseQuery<
+  usePageQuery: UseLazyQuery<
     QueryDefinition<
       number,
       BaseQueryFn<
@@ -27,43 +27,40 @@ const useFetchPages = (
       PostHeaderPage
     >
   >,
-  action: ActionCreatorWithPayload<any, any>
+  onLoadSuccess: ActionCreatorWithPayload<any, any>,
+  onLoadFail: ActionCreatorWithPayload<any, any>,
+  initialPageKey: number
 ) => {
-  const data = useAppSelector((state) => state.home);
-
-  const [pageNumber, setPageNumber] = useState(data.pageNumber);
-  const currentResult = usePageQuery(pageNumber);
-  const isSuccess = currentResult.isSuccess;
-  const isError = currentResult.isError;
+  const [trigger, currentResult] = usePageQuery();
   const dispatch = useAppDispatch();
-  const hasDuplicatePage = useCallback(
-    (postHeaderDTO: PostHeaderDTO) => {
-      if (data.posts.length === 0) return false;
-      else {
-        return data.posts.at(-1)?.id === postHeaderDTO.nextPosts.at(-1)?.id;
-      }
-    },
-    [data]
-  );
+
+  const hasNextPage =
+    currentResult.currentData?.hasNextPage ?? initialPageKey !== null;
+  const nextPageKey = currentResult.currentData?.nextPage ?? initialPageKey;
 
   const ref = useIntersect(async (entry, observer) => {
-    if (isSuccess && currentResult.data.hasNextPage) {
-      setPageNumber(currentResult.data.nextPage);
+    if (hasNextPage && !currentResult.isFetching) {
+      trigger(nextPageKey);
     }
   });
 
   useEffect(() => {
-    if (currentResult.isSuccess && !hasDuplicatePage(currentResult.data)) {
+    const { currentData, isSuccess, isError, isFetching } = currentResult;
+    if (isSuccess && !isFetching) {
       dispatch(
-        action({
-          pageNumber: pageNumber,
-          posts: currentResult.data.nextPosts,
+        onLoadSuccess({
+          nextPage: currentData.hasNextPage ? currentData.nextPage : null,
+          posts: currentData.nextPosts,
+          isSuccess: true,
+          isError: false,
         })
       );
+    } else if (isError) {
+      dispatch(onLoadFail);
     }
-  }, [currentResult, action, pageNumber, dispatch, hasDuplicatePage]);
+  }, [currentResult, onLoadSuccess, onLoadFail, dispatch]);
 
-  return { data, isSuccess, isError, ref };
+  return ref;
 };
 
 export { useFetchPages };

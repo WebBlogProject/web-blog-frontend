@@ -2,28 +2,42 @@ import { createSlice } from '@reduxjs/toolkit';
 import { PostHeaderData } from '../../types/PostHeaderData';
 
 type PageState = {
-  pageNumber: number;
+  nextPage: number;
   posts: PostHeaderData[];
+  isSuccess: boolean;
+  isError: boolean;
 };
 
 const initialState: PageState = {
-  pageNumber: 1,
+  nextPage: 1,
   posts: [],
+  isSuccess: false,
+  isError: false,
 };
 
 const homeSlice = createSlice({
   name: 'home',
   initialState,
   reducers: {
-    loadPostHeaderPage: (state, action) => {
-      const { pageNumber, posts } = action.payload;
+    postHeaderPageLoad: (state, action) => {
+      const { nextPage, posts, isSuccess, isError } = action.payload;
       return {
-        pageNumber: pageNumber,
+        nextPage: nextPage,
         posts: [...state.posts, ...posts],
+        isSuccess: isSuccess,
+        isError: isError,
+      };
+    },
+    postHeaderPageLoadFail: (state, action) => {
+      return {
+        ...state,
+        isSuccess: false,
+        isError: true,
       };
     },
   },
 });
 
 export { homeSlice };
-export const { loadPostHeaderPage } = homeSlice.actions;
+export const { postHeaderPageLoad, postHeaderPageLoadFail } = homeSlice.actions;
+export type { PageState };
