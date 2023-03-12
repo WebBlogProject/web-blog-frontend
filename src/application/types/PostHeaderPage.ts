@@ -1,9 +1,9 @@
 import { PostHeaderData } from './PostHeaderData';
 
-type PostHeaderDTO = {
+type PostHeaderPage = {
   nextPosts: PostHeaderData[];
   hasNextPage: boolean;
   nextPage: number;
 };
 
-export type { PostHeaderDTO };
+export type { PostHeaderPage };

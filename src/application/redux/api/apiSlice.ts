@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Post } from '../../types/Post';
-import { PostHeaderDTO } from '../../types/PostHeaderDTO';
+import { PostHeaderPage } from '../../types/PostHeaderPage';
 
 const apiSlice = createApi({
   reducerPath: 'api',
@@ -8,7 +8,7 @@ const apiSlice = createApi({
     baseUrl: '/mock',
   }),
   endpoints: (builder) => ({
-    getPostHeaders: builder.query<PostHeaderDTO, number>({
+    getPostHeaders: builder.query<PostHeaderPage, number>({
       query: (pageNumber: number) => `/postHeaders/${pageNumber}.json`,
     }),
     getPostById: builder.query<Post, number>({

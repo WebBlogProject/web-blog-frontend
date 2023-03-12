@@ -8,8 +8,8 @@ import {
 } from '@reduxjs/toolkit/dist/query';
 import { UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
 import { useCallback, useEffect, useState } from 'react';
-import { PostHeaderDTO } from '../../../application/types/PostHeaderDTO';
 import { useAppDispatch, useAppSelector } from './reduxHooks';
+import { PostHeaderPage } from '../../../application/types/PostHeaderPage';
 import { useIntersect } from './useIntersect';
 
 const useFetchPages = (
@@ -24,7 +24,7 @@ const useFetchPages = (
         FetchBaseQueryMeta
       >,
       never,
-      PostHeaderDTO
+      PostHeaderPage
     >
   >,
   action: ActionCreatorWithPayload<any, any>
