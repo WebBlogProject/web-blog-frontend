@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { BlogHeader } from './presentation/header/components/ts/BlogHeader';
 import { BlogPostPage } from './presentation/post/pages/ts/BlogPostPage';
-import { BlogHomePostList } from './presentation/home/components/ts/BlogHomePostList';
+import { BlogHomePostList } from './presentation/home/pages/ts/BlogHomePostList';
 import { ErrorPage, ErrorPageProps } from './presentation/pages/ts/ErrorPage';
 import { EmptyPage, EmptyPageProps } from './presentation/pages/ts/EmptyPage';
 
