@@ -1,5 +1,4 @@
-import '../css/BlogHomePostList.css';
-import { BlogPostCard } from '../../../shared/components/ts/BlogPostCard';
+import { BlogPostCardList } from '../../../shared/components/ts/BlogPostCardList';
 import { convertToPostPreview } from '../../../../application/mappers/postHeaderMappers';
 import { useLazyGetPostHeadersQuery } from '../../../../application/redux/api/apiSlice';
 import { useCallback, useMemo } from 'react';
@@ -33,20 +32,7 @@ function BlogHomePostList() {
 
   const renderPage = useCallback(() => {
     if (homeResult.isSuccess) {
-      return (
-        <div className="Card-container">
-          {posts.map((post: PostPreview) => (
-            <BlogPostCard
-              id={post.id}
-              title={post.title}
-              creationDate={post.creationDate}
-              estimatedTimeToRead={post.estimatedTimeToRead}
-              thumbnailUrl={post.thumbnailUrl}
-              key={post.id}
-            />
-          ))}
-        </div>
-      );
+      return <BlogPostCardList posts={posts} />;
     } else if (homeResult.isError && posts.length === 0) {
       return <ErrorPage msg={errorPageProps.msg} />;
     } else {
