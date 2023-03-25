@@ -1,0 +1,4 @@
+.BlogPostPage {
+  padding: max(8vmin, 40px) 0 max(8vmin, 64px);
+  word-break: break-word;
+}
