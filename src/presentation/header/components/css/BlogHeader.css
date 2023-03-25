@@ -1,8 +1,16 @@
+.BlogHeader {
+  text-align: left;
+}
+
 .BlogName {
-  text-align: center;
+  display: inline-block;
   font-size: 20px;
+  width: 100px;
+  margin-left: calc(50% - 50px);
+  margin-right: calc(45% - 15rem - 50px);
 }
 
 hr {
-  margin: 0;
+  /* To ignore default style of App.css */
+  margin: 0 !important;
 }
