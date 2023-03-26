@@ -83,7 +83,7 @@ function SearchResultPage() {
         <BlogPostCardList posts={mockPostHeader} />
       </div>
     );
-  }, []);
+  }, [query]);
   return <div>{renderPage()}</div>;
 }
 
