@@ -59,7 +59,8 @@ is the very first element in the post content */
 /* Now the content typography styles */
 .BlogPostBodyContent a {
   text-decoration: underline;
-  word-break: break-word;
+  word-break: normal;
+  overflow-wrap: anywhere;
 }
 
 .BlogPostBodyContent > blockquote:not([class]),
