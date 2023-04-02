@@ -15,7 +15,7 @@ const apiSlice = createApi({
     getPostById: builder.query<Post, number>({
       query: (id: number) => `/post/${id}.json`,
     }),
-    searchPostHeaders: builder.query<PostHeaderData[], string>({
+    getPostHeadersByKeyword: builder.query<PostHeaderData[], string>({
       query: (query: string) => `/query/${query}.json`,
     }),
   }),
@@ -25,5 +25,5 @@ export { apiSlice };
 export const {
   useLazyGetPostHeadersQuery,
   useGetPostByIdQuery,
-  useSearchPostHeadersQuery,
+  useGetPostHeadersByKeywordQuery,
 } = apiSlice;

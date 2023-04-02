@@ -4,7 +4,7 @@ import { BlogPostPage } from './presentation/post/pages/ts/BlogPostPage';
 import { BlogHomePostList } from './presentation/home/pages/ts/BlogHomePostList';
 import { ErrorPage, ErrorPageProps } from './presentation/pages/ts/ErrorPage';
 import { EmptyPage, EmptyPageProps } from './presentation/pages/ts/EmptyPage';
-import { SearchResultPage } from './presentation/searchPage/pages/ts/SearchResultPage';
+import { BlogSearchResultPage } from './presentation/searchPage/pages/ts/BlogSearchResultPage';
 
 const emptyPageProps: EmptyPageProps = {
   msg: '작성된 포스트(검색 결과)가 없습니다.',
@@ -14,7 +14,7 @@ const errorPageProps: ErrorPageProps = {
   msg: '일시적인 오류가 발생했습니다.',
 };
 
-const Layout = () => {
+const BlogMainLayout = () => {
   return (
     <>
       <BlogHeader />
@@ -25,7 +25,7 @@ const Layout = () => {
 
 const router = createBrowserRouter([
   {
-    element: <Layout />,
+    element: <BlogMainLayout />,
     children: [
       {
         path: '/',
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/search',
-        element: <SearchResultPage />,
+        element: <BlogSearchResultPage />,
       },
       // temporary link for testing EmptyPage
       {

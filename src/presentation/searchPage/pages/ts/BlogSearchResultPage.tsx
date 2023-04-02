@@ -2,22 +2,22 @@ import { useSearchParams } from 'react-router-dom';
 import { PostHeaderData } from '../../../../application/types/PostHeaderData';
 import { useCallback } from 'react';
 import { BlogPostCardList } from '../../../shared/components/ts/BlogPostCardList';
-import { KeywordBar } from '../../components/ts/KeywordBar';
-import { useSearchPostHeadersQuery } from '../../../../application/redux/api/apiSlice';
+import { KeywordPresenter } from '../../components/ts/KeywordPresenter';
+import { useGetPostHeadersByKeywordQuery } from '../../../../application/redux/api/apiSlice';
 import { ErrorPage } from '../../../pages/ts/ErrorPage';
 
-function SearchResultPage() {
-  const [search, setSearch] = useSearchParams();
+function BlogSearchResultPage() {
+  const [search] = useSearchParams();
   const query = search.get('q') ?? '';
 
-  const { data, isSuccess, isError } = useSearchPostHeadersQuery(query);
+  const { data, isSuccess, isError } = useGetPostHeadersByKeywordQuery(query);
 
   const renderPage = useCallback(() => {
     if (isSuccess) {
       const postHeaders = data ?? ({} as PostHeaderData[]);
       return (
         <div>
-          <KeywordBar keyword={query} />
+          <KeywordPresenter keyword={query} />
           <BlogPostCardList posts={postHeaders} />
         </div>
       );
@@ -26,8 +26,8 @@ function SearchResultPage() {
     } else {
       return <div> loading ... </div>;
     }
-  }, [query, isSuccess, isError]);
+  }, [query, data, isSuccess, isError]);
   return renderPage();
 }
 
-export { SearchResultPage };
+export { BlogSearchResultPage };
