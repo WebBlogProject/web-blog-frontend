@@ -11,7 +11,7 @@ import {
 } from '../../../../application/redux/home/homeSlice';
 import { useAppSelector } from '../../../shared/hooks/reduxHooks';
 
-function BlogHomePostList() {
+function BlogHomePostPage() {
   const homeResult = useAppSelector((state) => state.home);
   const ref = useFetchPages(
     useLazyGetPostHeadersQuery,
@@ -49,4 +49,4 @@ function BlogHomePostList() {
   );
 }
 
-export { BlogHomePostList };
+export { BlogHomePostPage };
