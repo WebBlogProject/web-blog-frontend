@@ -6,20 +6,21 @@ import loupeImage from '../../../../assets/loupeSmall.png';
 function BlogHeaderSearchBar() {
   const [query, setQuery] = useState('');
   const routerNavigate = useNavigate();
+  const searchResultPageUrl = `/search?q=${query}`;
 
   const searchIfEnter = useCallback(
     (e: React.KeyboardEvent<HTMLElement>) => {
       if (e.key !== 'Enter') {
         return;
       }
-      routerNavigate(`/search?q=${query}`);
+      routerNavigate(searchResultPageUrl);
     },
-    [query, routerNavigate]
+    [routerNavigate, searchResultPageUrl]
   );
 
   const onClickSearchButton = useCallback(() => {
-    routerNavigate(`/search?q=${query}`);
-  }, [query, routerNavigate]);
+    routerNavigate(searchResultPageUrl);
+  }, [routerNavigate, searchResultPageUrl]);
 
   return (
     <div className="BlogHeaderSearchBar">
