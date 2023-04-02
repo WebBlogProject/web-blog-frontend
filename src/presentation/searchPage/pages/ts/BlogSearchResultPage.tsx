@@ -18,7 +18,10 @@ function BlogSearchResultPage() {
       return (
         <div>
           <KeywordPresenter keyword={query} />
-          <BlogPostCardList posts={postHeaders} />
+          <BlogPostCardList
+            posts={postHeaders}
+            cardLayout="SearchResultCardLayout"
+          />
         </div>
       );
     } else if (isError) {

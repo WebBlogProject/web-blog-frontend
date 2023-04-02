@@ -4,11 +4,12 @@ import { PostPreview } from '../../../../application/types/PostPreview';
 
 type BlogPostCardListProps = {
   posts: PostPreview[];
+  cardLayout: string;
 };
 
-function BlogPostCardList({ posts }: BlogPostCardListProps) {
+function BlogPostCardList({ posts, cardLayout }: BlogPostCardListProps) {
   return (
-    <div className="Card-container">
+    <div className={cardLayout}>
       {posts.map((post: PostPreview) => (
         <BlogPostCard
           id={post.id}

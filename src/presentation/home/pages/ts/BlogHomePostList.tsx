@@ -32,7 +32,7 @@ function BlogHomePostList() {
 
   const renderPage = useCallback(() => {
     if (homeResult.isSuccess) {
-      return <BlogPostCardList posts={posts} />;
+      return <BlogPostCardList posts={posts} cardLayout="HomeCardLayout" />;
     } else if (homeResult.isError && posts.length === 0) {
       return <ErrorPage msg={errorPageProps.msg} />;
     } else {
