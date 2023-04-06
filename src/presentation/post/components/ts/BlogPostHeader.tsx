@@ -19,22 +19,24 @@ function BlogPostHeader({
   thumbnailUrl,
 }: BlogPostHeaderProps) {
   return (
-    <div className="BlogPostHeader">
-      <img
-        className="BlogPostHeader-thumbnail"
-        src={thumbnailUrl}
-        alt={`${title}_thumbnail`}
-      />
-      <div className="BlogPostHeader-title">{title}</div>
-      <div className="BlogPostHeader-description">
-        {`${getFormattedDate(creationDate)} \u00B7 ${estimatedTimeToRead} min`}
-      </div>
+    <header className="BlogPostHeader BlogGrid">
+      <figure className="BlogPostHeader-thumbnail">
+        <img
+          src={thumbnailUrl}
+          alt={`${title}_thumbnail`}
+          sizes="(min-width: 1400px) 1400px, 92vw"
+        />
+      </figure>
       <div>
         {tagList.map((tag) => (
           <BlogPostHeaderTagItem tagName={tag.tagName} key={tag.tagId} />
         ))}
       </div>
-    </div>
+      <h1 className="BlogPostHeader-title">{title}</h1>
+      <div className="BlogPostHeader-description">
+        {`${getFormattedDate(creationDate)} \u00B7 ${estimatedTimeToRead} min`}
+      </div>
+    </header>
   );
 }
 
