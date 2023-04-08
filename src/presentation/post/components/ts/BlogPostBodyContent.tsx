@@ -11,7 +11,7 @@ function BlogPostBodyContent({ bodyContent }: BlogPostBodyContentProps) {
     <ReactMarkdown
       children={bodyContent}
       remarkPlugins={[remarkGfm]}
-      className="BlogPostBodyContent"
+      className="BlogPostBodyContent BlogGrid"
     />
   );
 }

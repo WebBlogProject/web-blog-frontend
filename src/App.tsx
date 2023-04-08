@@ -5,6 +5,7 @@ import { BlogHomePostPage } from './presentation/home/pages/ts/BlogHomePage';
 import { ErrorPage, ErrorPageProps } from './presentation/pages/ts/ErrorPage';
 import { EmptyPage, EmptyPageProps } from './presentation/pages/ts/EmptyPage';
 import { BlogSearchResultPage } from './presentation/searchPage/pages/ts/BlogSearchResultPage';
+import './App.css';
 
 const emptyPageProps: EmptyPageProps = {
   msg: '작성된 포스트(검색 결과)가 없습니다.',

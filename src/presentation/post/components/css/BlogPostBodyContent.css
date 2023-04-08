@@ -1,4 +1,133 @@
 .BlogPostBodyContent {
-  padding: 0% 10% 0% 10%;
-  margin-top: 50px;
+  margin: 0;
+}
+
+/**
+ * Styles from below are copy of gh-content style of Ghost casper.
+ * This is for html content which is converted from mark-down by ReactMarkdown component.
+ */
+
+/* Default vertical spacing */
+.BlogPostBodyContent > * + * {
+  margin-top: max(3.2vmin, 24px);
+  margin-bottom: 0;
+}
+
+/* All headings h1-h6, reset all margins */
+.BlogPostBodyContent > h1,
+.BlogPostBodyContent > h2,
+.BlogPostBodyContent > h3,
+.BlogPostBodyContent > h4,
+.BlogPostBodyContent > h5,
+.BlogPostBodyContent > h6 {
+  margin: 0;
+  color: var(--color-darkgrey);
+}
+
+/* Add back a top margin to all headings, unless a heading
+is the very first element in the post content */
+.BlogPostBodyContent > h1:not(:first-child),
+.BlogPostBodyContent > h2:not(:first-child),
+.BlogPostBodyContent > h3:not(:first-child),
+.BlogPostBodyContent > h4:not(:first-child),
+.BlogPostBodyContent > h5:not(:first-child),
+.BlogPostBodyContent > h6:not(:first-child) {
+  margin: 2em 0 0;
+}
+
+/* Add a small margin between a heading and anything after it */
+.BlogPostBodyContent > h1 + *,
+.BlogPostBodyContent > h2 + *,
+.BlogPostBodyContent > h3 + *,
+.BlogPostBodyContent > h4 + *,
+.BlogPostBodyContent > h5 + *,
+.BlogPostBodyContent > h6 + * {
+  margin-top: 1.5rem !important;
+}
+
+/* A larger margin before/after HRs and blockquotes */
+.BlogPostBodyContent > hr,
+.BlogPostBodyContent > blockquote {
+  position: relative;
+  margin-top: max(4.8vmin, 32px);
+}
+.BlogPostBodyContent > hr + *,
+.BlogPostBodyContent > blockquote + * {
+  margin-top: max(4.8vmin, 32px) !important;
+}
+
+/* Now the content typography styles */
+.BlogPostBodyContent a {
+  text-decoration: underline;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+.BlogPostBodyContent > blockquote:not([class]),
+.BlogPostBodyContent > ol,
+.BlogPostBodyContent > ul,
+.BlogPostBodyContent > dl,
+.BlogPostBodyContent > p {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1.6em;
+}
+
+.blogPostBodyContent > ul,
+.blogPostBodyContent > ol,
+.blogPostBodyContent > dl {
+  padding-left: 1.9em;
+}
+
+.blogPostBodyContent > blockquote:not([class]) {
+  position: relative;
+  font-style: italic;
+  padding: 0;
+}
+
+.blogPostBodyContent > blockquote:not([class])::before {
+  content: '';
+  position: absolute;
+  left: -1.5em;
+  top: 0;
+  bottom: 0;
+  width: 0.3rem;
+}
+
+.blogPostBodyContent :not(pre) > code {
+  vertical-align: middle;
+  padding: 0.15em 0.4em 0.15em;
+  border: #e1eaef 1px solid;
+  font-weight: 400 !important;
+  font-size: 0.9em;
+  line-height: 1em;
+  color: #15171a;
+  background: #f0f6f9;
+  border-radius: 0.25em;
+}
+
+.blogPostBodyContent pre {
+  overflow: auto;
+  padding: 16px 20px;
+  color: var(--color-wash);
+  font-size: 1.4rem;
+  line-height: 1.5em;
+  background: var(--color-darkgrey);
+  border-radius: 5px;
+  box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 650px) {
+  .blogPostBodyContent > blockquote:not([class]),
+  .blogPostBodyContent > ol,
+  .blogPostBodyContent > ul,
+  .blogPostBodyContent > dl,
+  .blogPostBodyContent > p {
+    font-size: 1.8rem;
+  }
+
+  .blogPostBodyContent blockquote:not([class])::before {
+    left: min(-4vmin, -20px);
+  }
 }

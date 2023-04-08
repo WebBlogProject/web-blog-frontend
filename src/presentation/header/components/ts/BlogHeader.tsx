@@ -13,7 +13,7 @@ function BlogHeader() {
   }, [routerNavigate]);
 
   return (
-    <div>
+    <div className="BlogHeader">
       <div className="BlogName" onClick={onClickSearchButton}>
         {blogName}
       </div>

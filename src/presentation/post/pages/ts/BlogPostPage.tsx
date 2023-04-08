@@ -3,6 +3,7 @@ import { useGetPostByIdQuery } from '../../../../application/redux/api/apiSlice'
 import { ErrorPage, ErrorPageProps } from '../../../pages/ts/ErrorPage';
 import { BlogPostBodyContent } from '../../components/ts/BlogPostBodyContent';
 import { BlogPostHeader } from '../../components/ts/BlogPostHeader';
+import '../css/BlogPostPage.css';
 
 function BlogPostPage() {
   const errorPageProps: ErrorPageProps = {
@@ -15,7 +16,7 @@ function BlogPostPage() {
 
   if (isSuccess) {
     return (
-      <div>
+      <article className="BlogPostPage">
         <BlogPostHeader
           title={data.title}
           creationDate={data.creationDate}
@@ -24,7 +25,7 @@ function BlogPostPage() {
           tagList={data.tagList}
         />
         <BlogPostBodyContent bodyContent={data.bodyContent} />
-      </div>
+      </article>
     );
   } else if (isError) {
     return <ErrorPage msg={errorPageProps.msg} />;
