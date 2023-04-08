@@ -1,6 +1,8 @@
 import { useSearchParams } from 'react-router-dom';
+import { convertToPostPreview } from '../../../../application/mappers/postHeaderMappers';
+import { PostPreview } from '../../../../application/types/PostPreview';
 import { PostHeaderData } from '../../../../application/types/PostHeaderData';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { BlogPostCardList } from '../../../shared/components/ts/BlogPostCardList';
 import { KeywordPresenter } from '../../components/ts/KeywordPresenter';
 import { useGetPostHeadersByKeywordQuery } from '../../../../application/redux/api/apiSlice';
@@ -12,16 +14,17 @@ function BlogSearchResultPage() {
 
   const { data, isSuccess, isError } = useGetPostHeadersByKeywordQuery(query);
 
+  const posts: PostPreview[] = useMemo(() => {
+    const postHeaders = data ?? ([] as PostHeaderData[]);
+    return postHeaders.map(convertToPostPreview) ?? [];
+  }, [data]);
+
   const renderPage = useCallback(() => {
     if (isSuccess) {
-      const postHeaders = data ?? ({} as PostHeaderData[]);
       return (
         <div>
           <KeywordPresenter keyword={query} />
-          <BlogPostCardList
-            posts={postHeaders}
-            cardLayout="SearchResultCardLayout"
-          />
+          <BlogPostCardList posts={posts} cardLayout="SearchResultCardLayout" />
         </div>
       );
     } else if (isError) {
@@ -29,7 +32,7 @@ function BlogSearchResultPage() {
     } else {
       return <div> loading ... </div>;
     }
-  }, [query, data, isSuccess, isError]);
+  }, [query, isSuccess, isError]);
   return renderPage();
 }
 
