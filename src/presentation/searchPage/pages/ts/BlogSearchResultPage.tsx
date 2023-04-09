@@ -32,7 +32,7 @@ function BlogSearchResultPage() {
     } else {
       return <div> loading ... </div>;
     }
-  }, [query, isSuccess, isError]);
+  }, [query, posts, isSuccess, isError]);
   return renderPage();
 }
 
