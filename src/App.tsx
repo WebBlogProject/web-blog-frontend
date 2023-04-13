@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { BlogHeader } from './presentation/header/components/ts/BlogHeader';
 import { BlogPostPage } from './presentation/post/pages/ts/BlogPostPage';
-import { BlogHomePostPage } from './presentation/home/pages/ts/BlogHomePage';
+import { BlogHomePage } from './presentation/home/pages/ts/BlogHomePage';
 import { ErrorPage, ErrorPageProps } from './presentation/pages/ts/ErrorPage';
 import { EmptyPage, EmptyPageProps } from './presentation/pages/ts/EmptyPage';
 import { BlogSearchResultPage } from './presentation/searchPage/pages/ts/BlogSearchResultPage';
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <BlogHomePostPage />,
+        element: <BlogHomePage />,
         errorElement: <ErrorPage {...errorPageProps} />,
       },
       {
