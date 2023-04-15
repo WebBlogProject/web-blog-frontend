@@ -1,0 +1,20 @@
+.KeywordPresenter {
+  flex-wrap: wrap;
+  width: 85%;
+  margin: 1em auto 0 auto;
+  border-bottom: solid;
+}
+.KeywordHeader {
+  display: flex;
+  margin: 0.1em;
+}
+
+.KeywordHeader .loupe {
+  height: 1em;
+  width: auto;
+  margin: 0.1em 0 0 0.2em;
+}
+
+.Keyword {
+  margin: 0.1em;
+}

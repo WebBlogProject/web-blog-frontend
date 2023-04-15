@@ -1,25 +1,26 @@
 import React, { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/BlogHeaderSearchBar.css';
 import loupeImage from '../../../../assets/loupeSmall.png';
 
 function BlogHeaderSearchBar() {
   const [query, setQuery] = useState('');
+  const routerNavigate = useNavigate();
+  const searchResultPageUrl = `/search?q=${query}`;
 
   const searchIfEnter = useCallback(
     (e: React.KeyboardEvent<HTMLElement>) => {
       if (e.key !== 'Enter') {
         return;
       }
-      /* TODO: Impelemnt search */
-      console.log(query);
+      routerNavigate(searchResultPageUrl);
     },
-    [query]
+    [routerNavigate, searchResultPageUrl]
   );
 
   const onClickSearchButton = useCallback(() => {
-    /* TODO: Impelemnt search */
-    console.log('click button');
-  }, []);
+    routerNavigate(searchResultPageUrl);
+  }, [routerNavigate, searchResultPageUrl]);
 
   return (
     <div className="BlogHeaderSearchBar">
@@ -34,7 +35,7 @@ function BlogHeaderSearchBar() {
         className="BlogHeaderSearchBar-input"
         type="search"
         onChange={(e) => setQuery(e.target.value)}
-        onKeyPress={searchIfEnter}
+        onKeyDown={searchIfEnter}
         value={query}
       />
     </div>
