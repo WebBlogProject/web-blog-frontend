@@ -1,0 +1,84 @@
+{
+  "nextPosts": [
+    {
+      "id": 7,
+      "title": "odd Blog 7",
+      "creationDate": 1000,
+      "estimatedTimeToRead": 3,
+      "thumbnailUrl": "someUrl.png",
+      "tagList": [
+        {
+          "tagId": 1,
+          "tagName": "tag1"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "odd Blog 8",
+      "creationDate": 1000,
+      "estimatedTimeToRead": 3,
+      "thumbnailUrl": "someUrl.png",
+      "tagList": [
+        {
+          "tagId": 1,
+          "tagName": "tag1"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "odd Blog 9",
+      "creationDate": 1000,
+      "estimatedTimeToRead": 3,
+      "thumbnailUrl": "someUrl.png",
+      "tagList": [
+        {
+          "tagId": 1,
+          "tagName": "tag1"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "odd Blog 10",
+      "creationDate": 1000,
+      "estimatedTimeToRead": 3,
+      "thumbnailUrl": "someUrl.png",
+      "tagList": [
+        {
+          "tagId": 1,
+          "tagName": "tag1"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "odd Blog 11",
+      "creationDate": 1000,
+      "estimatedTimeToRead": 3,
+      "thumbnailUrl": "someUrl.png",
+      "tagList": [
+        {
+          "tagId": 1,
+          "tagName": "tag1"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "odd Blog 12",
+      "creationDate": 1000,
+      "estimatedTimeToRead": 3,
+      "thumbnailUrl": "someUrl.png",
+      "tagList": [
+        {
+          "tagId": 1,
+          "tagName": "tag1"
+        }
+      ]
+    }
+  ],
+  "hasNextPage": true,
+  "nextPage": 3
+}
