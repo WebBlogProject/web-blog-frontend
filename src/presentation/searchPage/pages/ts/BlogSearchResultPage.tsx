@@ -11,11 +11,14 @@ import { useAppSelector } from '../../../shared/hooks/reduxHooks';
 import {
   searchPostHeaderPageLoad,
   searchPostHeaderPageLoadFail,
+  clearSearchResult,
 } from '../../../../application/redux/searchResult/searchResultSlice';
 import { useFetchPages } from '../../../shared/hooks/useFetchPages';
 import { SearchQueryArgs } from '../../../../application/types/SearchQueryArgs';
+import { useAppDispatch } from '../../../shared/hooks/reduxHooks';
 
 function BlogSearchResultPage() {
+  const dispatch = useAppDispatch();
   const [search] = useSearchParams();
   const query = search.get('q') ?? '';
 
@@ -30,13 +33,18 @@ function BlogSearchResultPage() {
   );
 
   const searchResult = useAppSelector((state) => state.searchResult);
-  const ref = useFetchPages<SearchQueryArgs>(
+  const { ref, refresh } = useFetchPages<SearchQueryArgs>(
     useLazyGetPostHeadersByKeywordQuery,
     searchPostHeaderPageLoad,
     searchPostHeaderPageLoadFail,
     getQueryParam,
     searchResult.nextPage
   );
+
+  useEffect(() => {
+    refresh();
+    dispatch(clearSearchResult({}));
+  }, [query, dispatch, refresh]);
 
   const posts: PostPreview[] = useMemo(() => {
     const postHeaders = searchResult.posts ?? ([] as PostHeaderData[]);

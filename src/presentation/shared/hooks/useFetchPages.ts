@@ -7,7 +7,7 @@ import {
   QueryDefinition,
 } from '@reduxjs/toolkit/dist/query';
 import { UseLazyQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { PostHeaderPage } from '../../../application/types/PostHeaderPage';
 import { useAppDispatch } from './reduxHooks';
 import { useIntersect } from './useIntersect';
@@ -45,6 +45,10 @@ const useFetchPages = <T>(
     }
   });
 
+  const refresh = useCallback(() => {
+    trigger(getQueryParam(1));
+  }, [trigger, getQueryParam]);
+
   useEffect(() => {
     const { currentData, isSuccess, isError, isFetching } = currentResult;
     if (isSuccess && !isFetching) {
@@ -61,7 +65,7 @@ const useFetchPages = <T>(
     }
   }, [currentResult, onLoadSuccess, onLoadFail, dispatch]);
 
-  return ref;
+  return { ref, refresh };
 };
 
 export { useFetchPages };
