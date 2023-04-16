@@ -13,10 +13,16 @@ import { useAppSelector } from '../../../shared/hooks/reduxHooks';
 
 function BlogHomePage() {
   const homeResult = useAppSelector((state) => state.home);
-  const ref = useFetchPages(
+
+  const getQueryParam = useCallback((scrollId: number) => {
+    return scrollId;
+  }, []);
+
+  const ref = useFetchPages<number>(
     useLazyGetPostHeadersQuery,
     postHeaderPageLoad,
     postHeaderPageLoadFail,
+    getQueryParam,
     homeResult.nextPage
   );
 
