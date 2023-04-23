@@ -8,11 +8,11 @@ const initialState: PageState = {
   isError: false,
 };
 
-const homeSlice = createSlice({
-  name: 'home',
+const searchResultSlice = createSlice({
+  name: 'searchResult',
   initialState,
   reducers: {
-    postHeaderPageLoad: (state, action) => {
+    searchPostHeaderPageLoad: (state, action) => {
       const { nextPage, posts, isSuccess, isError } = action.payload;
       return {
         ...state,
@@ -22,15 +22,23 @@ const homeSlice = createSlice({
         isError: isError,
       };
     },
-    postHeaderPageLoadFail: (state, action) => {
+    searchPostHeaderPageLoadFail: (state, action) => {
       return {
         ...state,
         isSuccess: false,
         isError: true,
       };
     },
-  },
+    resetSearchPostHeader: (state, action) => {
+      return {
+        nextPage: 1,
+        posts: [],
+        isSuccess: false,
+        isError: false,
+      };
+    }
+  }
 });
 
-export { homeSlice };
-export const { postHeaderPageLoad, postHeaderPageLoadFail } = homeSlice.actions;
+export { searchResultSlice };
+export const { searchPostHeaderPageLoad, searchPostHeaderPageLoadFail, resetSearchPostHeader } = searchResultSlice.actions;
