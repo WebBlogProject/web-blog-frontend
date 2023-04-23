@@ -12,10 +12,10 @@ import { PostHeaderPage } from '../../../application/types/PostHeaderPage';
 import { useAppDispatch } from './reduxHooks';
 import { useIntersect } from './useIntersect';
 
-const useFetchPages = (
+const useFetchPages = <T>(
   usePageQuery: UseLazyQuery<
     QueryDefinition<
-      number,
+      T,
       BaseQueryFn<
         string | FetchArgs,
         unknown,
@@ -29,18 +29,18 @@ const useFetchPages = (
   >,
   onLoadSuccess: ActionCreatorWithPayload<any, any>,
   onLoadFail: ActionCreatorWithPayload<any, any>,
-  initialPageKey: number
+  getSearchArg: (nextPageKey: number) => T,
 ) => {
   const [trigger, currentResult] = usePageQuery();
   const dispatch = useAppDispatch();
 
   const hasNextPage =
-    currentResult.currentData?.hasNextPage ?? initialPageKey !== null;
-  const nextPageKey = currentResult.currentData?.nextPage ?? initialPageKey;
+    currentResult.currentData?.hasNextPage ?? true;
+  const nextPageId = currentResult.currentData?.nextPage ?? 1;
 
   const ref = useIntersect(async (entry, observer) => {
     if (hasNextPage && !currentResult.isFetching) {
-      trigger(nextPageKey);
+      trigger(getSearchArg(nextPageId));
     }
   });
 

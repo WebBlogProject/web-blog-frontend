@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Post } from '../../types/Post';
 import { PostHeaderPage } from '../../types/PostHeaderPage';
-import { PostHeaderData } from '../../types/PostHeaderData';
 import { SearchQueryArgs } from '../../types/SearchQueryArgs';
 
 const apiSlice = createApi({
@@ -16,7 +15,7 @@ const apiSlice = createApi({
     getPostById: builder.query<Post, number>({
       query: (id: number) => `/post/${id}.json`,
     }),
-    getPostHeadersByKeyword: builder.query<PostHeaderData[], SearchQueryArgs>({
+    getPostHeadersByKeyword: builder.query<PostHeaderPage, SearchQueryArgs>({
       query: (arg: SearchQueryArgs) => `/query/${arg.keyword}/${arg.pageId}.json`,
     }),
   }),
