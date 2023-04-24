@@ -1,20 +1,22 @@
 import { useSearchParams } from 'react-router-dom';
 import { convertToPostPreview } from '../../../../application/mappers/postHeaderMappers';
 import { PostPreview } from '../../../../application/types/PostPreview';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { BlogPostCardList } from '../../../shared/components/ts/BlogPostCardList';
 import { KeywordPresenter } from '../../components/ts/KeywordPresenter';
 import { useLazyGetPostHeadersByKeywordQuery } from '../../../../application/redux/api/apiSlice';
 import { ErrorPage, ErrorPageProps } from '../../../pages/ts/ErrorPage';
-import { useAppSelector } from '../../../shared/hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../../../shared/hooks/reduxHooks';
 import { SearchQueryArgs } from '../../../../application/types/SearchQueryArgs';
 import { useFetchPages } from '../../../shared/hooks/useFetchPages';
 import {
+  resetSearchPostHeader,
   searchPostHeaderPageLoad,
   searchPostHeaderPageLoadFail
 } from '../../../../application/redux/searchResult/searchResultSlice';
 
 function BlogSearchResultPage() {
+  const dispatch = useAppDispatch();
   const [search] = useSearchParams();
   const query = search.get('q') ?? '';
 
@@ -27,6 +29,7 @@ function BlogSearchResultPage() {
     searchPostHeaderPageLoad,
     searchPostHeaderPageLoadFail,
     getSearchArg,
+    searchResult.nextPage,
   )
 
   const posts: PostPreview[] = useMemo(() => {
@@ -53,6 +56,7 @@ function BlogSearchResultPage() {
       return <div> loading ... </div>;
     }
   }, [searchResult, errorPageProps, posts, query]);
+
   return (
     <div>
       {renderPage()}

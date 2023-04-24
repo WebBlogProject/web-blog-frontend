@@ -16,11 +16,13 @@ function BlogHomePage() {
   const getSearchArg = useCallback((pageId: number) => {
     return pageId
   }, [])
+
   const ref = useFetchPages(
     useLazyGetPostHeadersQuery,
     postHeaderPageLoad,
     postHeaderPageLoadFail,
     getSearchArg,
+    homeResult.nextPage,
   );
 
   const posts: PostPreview[] = useMemo(() => {
