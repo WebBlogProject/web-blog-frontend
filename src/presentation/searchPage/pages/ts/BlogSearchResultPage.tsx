@@ -24,6 +24,11 @@ function BlogSearchResultPage() {
   const getSearchArg = useCallback((pageId: number) => {
     return {pageId: pageId, keyword: query} as SearchQueryArgs
   }, [query])
+
+  useEffect(() => {
+    dispatch(resetSearchPostHeader({}))
+  }, [query, dispatch])
+
   const ref = useFetchPages(
     useLazyGetPostHeadersByKeywordQuery,
     searchPostHeaderPageLoad,
