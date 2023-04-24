@@ -35,7 +35,7 @@ const useFetchPages = <T>(
   const [trigger, currentResult] = usePageQuery();
   const dispatch = useAppDispatch();
 
-  const hasNextPage = nextPage !== null;
+  const hasNextPage = nextPage !== 0;
   const nextPageId = nextPage;
 
   const ref = useIntersect(async (entry, observer) => {
@@ -49,14 +49,14 @@ const useFetchPages = <T>(
     if (isSuccess && !isFetching) {
       dispatch(
         onLoadSuccess({
-          nextPage: currentData.hasNextPage ? currentData.nextPage : null,
+          nextPage: currentData.hasNextPage ? currentData.nextPage : 0,
           posts: currentData.nextPosts,
           isSuccess: true,
           isError: false,
         })
       );
     } else if (isError) {
-      dispatch(onLoadFail);
+      dispatch(onLoadFail({}));
     }
   }, [currentResult, onLoadSuccess, onLoadFail, dispatch]);
 

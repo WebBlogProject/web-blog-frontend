@@ -25,6 +25,7 @@ const searchResultSlice = createSlice({
     searchPostHeaderPageLoadFail: (state, action) => {
       return {
         ...state,
+        nextPage: 0,
         isSuccess: false,
         isError: true,
       };

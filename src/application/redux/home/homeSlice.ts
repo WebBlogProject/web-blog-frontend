@@ -25,6 +25,7 @@ const homeSlice = createSlice({
     postHeaderPageLoadFail: (state, action) => {
       return {
         ...state,
+        nextPage: 0,
         isSuccess: false,
         isError: true,
       };
