@@ -1,6 +1,13 @@
+/** 
+* Styles in this file are copy of global.css and screen.css in TryGhost/Casper.
+* Link of original file and code are attached to each style code.
+* Original license: https://github.com/TryGhost/Casper/blob/main/LICENSE
+*/
+
 /**
- * This class is correspond to gh-canvas class of Ghost Casper style
- */
+* Copy of .gh-canvas style of screen.css.
+* Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L1298
+*/
 .BlogGrid {
   display: grid;
   grid-template-columns:
@@ -17,13 +24,18 @@
     [full-end];
 }
 
+/**
+* Copy of .gh-canvas > * style of screen.css.
+* Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L1315
+*/
 .BlogGrid > * {
   grid-column: main-start / main-end;
 }
 
 /**
- * This is root style copy of screen.css of Ghost style
- */
+* Copy of :root style of screen.css.
+* Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L31
+*/
 :root {
   --color-green: #a4d037;
   --color-yellow: #fecd35;
@@ -46,6 +58,7 @@
 /**
  * Styles below are copy of global.css of Ghost style.
  * This styles are for setting default style of html tags.
+ * Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/global.css
  */
 html,
 body,

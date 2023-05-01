@@ -1,3 +1,9 @@
+/** 
+* This is copy of .article of screen.css in TryGhost/Casper.
+* Original file and license are like below.
+* Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L1215
+* Original license: https://github.com/TryGhost/Casper/blob/main/LICENSE
+*/
 .BlogPostPage {
   padding: max(8vmin, 40px) 0 max(8vmin, 64px);
   word-break: normal;
