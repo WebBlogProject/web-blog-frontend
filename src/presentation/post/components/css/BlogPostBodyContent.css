@@ -3,7 +3,13 @@
 }
 
 /**
- * Styles from below are copy of gh-content style of Ghost casper.
+ * Below styles are copy of .gh-content related styles of screen.css in TryGhost/Casper.
+ * Original file and license are like below.
+ * Original file: 
+ *  From: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L1340
+ *  To: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L1504
+ * Original license: https://github.com/TryGhost/Casper/blob/main/LICENSE
+ * 
  * This is for html content which is converted from mark-down by ReactMarkdown component.
  */
 

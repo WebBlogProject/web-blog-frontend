@@ -1,13 +1,31 @@
+/** 
+* Styles in this file are copy of screen.css in TryGhost/Casper.
+* Link of original file and code are attached to each style code.
+* Original license: https://github.com/TryGhost/Casper/blob/main/LICENSE
+*/
+
+/**
+* Copy of .article-header style of screen.css.
+* Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L1224
+*/
 .BlogPostHeader {
   padding: 0 0 max(6.4vmin, 40px) 0;
 }
 
+/**
+* Copy of .article-image style of screen.css.
+* Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L1261
+*/
 .BlogGrid .BlogPostHeader-thumbnail {
   width: 100%;
   margin: 0;
   grid-column: wide-start / wide-end;
 }
 
+/**
+* Copy of .article-image img style of screen.css.
+* Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L1275
+*/
 .BlogPostHeader-thumbnail img {
   display: block;
   margin-left: auto;
@@ -16,6 +34,10 @@
   height: auto;
 }
 
+/**
+* Copy of .article-title style of screen.css.
+* Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L1241
+*/
 .BlogPostHeader-title {
   margin-top: 0;
   margin-bottom: 0;
@@ -25,6 +47,12 @@
   color: var(--color-darkgrey);
 }
 
+/**
+* Copy of .article-byline and .article-byline-meta style of screen.css.
+* Original files: 
+*   https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L1694
+*   https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L1711
+*/
 .BlogPostHeader-description {
   display: flex;
   justify-content: space-between;
