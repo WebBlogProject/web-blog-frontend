@@ -1,7 +1,7 @@
 import { PostHeaderData } from './PostHeaderData';
 
 type PageState = {
-  nextPage: number;
+  nextPage: number | null;
   posts: PostHeaderData[];
   isSuccess: boolean;
   isError: boolean;

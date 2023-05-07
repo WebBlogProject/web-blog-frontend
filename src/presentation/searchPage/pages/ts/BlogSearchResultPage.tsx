@@ -21,7 +21,7 @@ function BlogSearchResultPage() {
   const query = search.get('q') ?? '';
 
   const searchResult = useAppSelector((state) => state.searchResult)
-  const getSearchArg = useCallback((pageId: number) => {
+  const getSearchArg = useCallback((pageId: number | null) => {
     return {pageId: pageId, keyword: query} as SearchQueryArgs
   }, [query])
 

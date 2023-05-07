@@ -13,7 +13,7 @@ import { useAppSelector } from '../../../shared/hooks/reduxHooks';
 
 function BlogHomePage() {
   const homeResult = useAppSelector((state) => state.home);
-  const getSearchArg = useCallback((pageId: number) => {
+  const getSearchArg = useCallback((pageId: number | null) => {
     return pageId
   }, [])
 

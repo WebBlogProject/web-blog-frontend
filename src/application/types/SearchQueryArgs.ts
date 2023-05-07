@@ -1,5 +1,5 @@
 type SearchQueryArgs = {
-  pageId: number;
+  pageId: number | null;
   keyword: string;
 }
 
