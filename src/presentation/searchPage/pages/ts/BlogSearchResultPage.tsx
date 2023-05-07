@@ -21,13 +21,16 @@ function BlogSearchResultPage() {
   const query = search.get('q') ?? '';
 
   const searchResult = useAppSelector((state) => state.searchResult)
+  const stateQuery = searchResult.query
   const getFetchArg = useCallback((pageId: number | null) => {
     return {pageId: pageId, keyword: query} as SearchQueryArgs
   }, [query])
 
   useEffect(() => {
-    dispatch(resetSearchPostHeader({}))
-  }, [query, dispatch])
+    if(stateQuery !== query) {
+      dispatch(resetSearchPostHeader({query: query}))
+    }
+  }, [stateQuery, query, dispatch])
 
   const ref = useFetchPages(
     useLazyGetPostHeadersByKeywordQuery,

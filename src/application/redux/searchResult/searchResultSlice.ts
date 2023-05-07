@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { PageState, INITIAL_PAGE } from '../../types/PageState';
+import { SearchPageState, INITIAL_PAGE } from '../../types/PageState';
 
-const initialState: PageState = {
+const initialState: SearchPageState = {
   nextPage: INITIAL_PAGE,
   posts: [],
   isSuccess: false,
   isError: false,
+  query: "",
 };
 
 const searchResultSlice = createSlice({
@@ -30,7 +31,14 @@ const searchResultSlice = createSlice({
       };
     },
     resetSearchPostHeader: (state, action) => {
-      return initialState;
+      const { query } = action.payload;
+      return {
+        nextPage: INITIAL_PAGE,
+        posts: [],
+        isSuccess: false,
+        isError: false,
+        query: query,
+      };
     }
   }
 });
