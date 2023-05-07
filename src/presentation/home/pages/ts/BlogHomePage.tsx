@@ -13,7 +13,7 @@ import { useAppSelector } from '../../../shared/hooks/reduxHooks';
 
 function BlogHomePage() {
   const homeResult = useAppSelector((state) => state.home);
-  const getSearchArg = useCallback((pageId: number | null) => {
+  const getFetchArg = useCallback((pageId: number | null) => {
     return pageId
   }, [])
 
@@ -21,7 +21,7 @@ function BlogHomePage() {
     useLazyGetPostHeadersQuery,
     postHeaderPageLoad,
     postHeaderPageLoadFail,
-    getSearchArg,
+    getFetchArg,
     homeResult.nextPage,
   );
 

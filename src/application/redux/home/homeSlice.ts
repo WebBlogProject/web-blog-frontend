@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { PageState } from '../../types/PageState';
+import { PageState, INITIAL_PAGE } from '../../types/PageState';
 
 const initialState: PageState = {
-  nextPage: 1,
+  nextPage: INITIAL_PAGE,
   posts: [],
   isSuccess: false,
   isError: false,

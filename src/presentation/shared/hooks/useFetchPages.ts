@@ -29,7 +29,7 @@ const useFetchPages = <T>(
   >,
   onLoadSuccess: ActionCreatorWithPayload<any, any>,
   onLoadFail: ActionCreatorWithPayload<any, any>,
-  getSearchArg: (nextPageKey: number | null) => T | null,
+  getFetchArg: (nextPageKey: number | null) => T | null,
   nextPage: number | null
 ) => {
   const [trigger, currentResult] = usePageQuery();
@@ -39,7 +39,7 @@ const useFetchPages = <T>(
   const nextPageId = nextPage;
 
   const ref = useIntersect(async (entry, observer) => {
-    const fetchArg = getSearchArg(nextPageId)
+    const fetchArg = getFetchArg(nextPageId)
     if (hasNextPage && !currentResult.isFetching && fetchArg != null) {
       trigger(fetchArg);
     }

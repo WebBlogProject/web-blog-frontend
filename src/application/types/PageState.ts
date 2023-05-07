@@ -7,4 +7,5 @@ type PageState = {
   isError: boolean;
 };
 
-export type { PageState }
+export type { PageState };
+export const INITIAL_PAGE = 1;
