@@ -1,6 +1,6 @@
 import { PostHeaderData } from './PostHeaderData';
 
-type HomePageState = {
+type PageState = {
   nextPage: number | null;
   posts: PostHeaderData[];
   isSuccess: boolean;
@@ -8,12 +8,9 @@ type HomePageState = {
 };
 
 type SearchPageState = {
-  nextPage: number | null;
-  posts: PostHeaderData[];
-  isSuccess: boolean;
-  isError: boolean;
+  pageState: PageState;
   query: string;
 }
 
-export type { HomePageState, SearchPageState };
+export type { PageState, SearchPageState };
 export const INITIAL_PAGE = 1;

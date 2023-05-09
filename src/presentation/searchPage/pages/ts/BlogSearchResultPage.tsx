@@ -37,11 +37,11 @@ function BlogSearchResultPage() {
     searchPostHeaderPageLoad,
     searchPostHeaderPageLoadFail,
     getFetchArg,
-    searchResult.nextPage,
+    searchResult.pageState.nextPage,
   )
 
   const posts: PostPreview[] = useMemo(() => {
-    return searchResult.posts.map(convertToPostPreview) ?? [];
+    return searchResult.pageState.posts.map(convertToPostPreview) ?? [];
   }, [searchResult]);
 
   const errorPageProps: ErrorPageProps = useMemo(()=> {
@@ -51,14 +51,14 @@ function BlogSearchResultPage() {
   }, []);
 
   const renderPage = useCallback(() => {
-    if (searchResult.isSuccess) {
+    if (searchResult.pageState.isSuccess) {
       return (
         <div>
           <KeywordPresenter keyword={query} />
           <BlogPostCardList posts={posts} cardLayout="SearchResultCardLayout" />
         </div>
       );
-    } else if (searchResult.isError) {
+    } else if (searchResult.pageState.isError) {
       return <ErrorPage msg={errorPageProps.msg} />;
     } else {
       return <div> loading ... </div>;

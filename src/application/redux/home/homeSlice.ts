@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { HomePageState, INITIAL_PAGE } from '../../types/PageState';
+import { PageState, INITIAL_PAGE } from '../../types/PageState';
 
-const initialState: HomePageState = {
+const initialState: PageState = {
   nextPage: INITIAL_PAGE,
   posts: [],
   isSuccess: false,

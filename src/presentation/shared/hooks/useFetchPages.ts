@@ -57,7 +57,7 @@ const useFetchPages = <T>(
         })
       );
     } else if (isError) {
-      dispatch(onLoadFail);
+      dispatch(onLoadFail({}));
     }
   }, [currentResult, onLoadSuccess, onLoadFail, dispatch]);
 
