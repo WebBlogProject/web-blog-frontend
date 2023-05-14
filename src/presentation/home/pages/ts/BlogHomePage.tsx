@@ -13,11 +13,16 @@ import { useAppSelector } from '../../../shared/hooks/reduxHooks';
 
 function BlogHomePage() {
   const homeResult = useAppSelector((state) => state.home);
+  const getFetchArg = useCallback((pageId: number | null) => {
+    return pageId
+  }, [])
+
   const ref = useFetchPages(
     useLazyGetPostHeadersQuery,
     postHeaderPageLoad,
     postHeaderPageLoadFail,
-    homeResult.nextPage
+    getFetchArg,
+    homeResult.nextPage,
   );
 
   const posts: PostPreview[] = useMemo(() => {

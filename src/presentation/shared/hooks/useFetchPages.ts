@@ -12,10 +12,10 @@ import { PostHeaderPage } from '../../../application/types/PostHeaderPage';
 import { useAppDispatch } from './reduxHooks';
 import { useIntersect } from './useIntersect';
 
-const useFetchPages = (
+const useFetchPages = <T>(
   usePageQuery: UseLazyQuery<
     QueryDefinition<
-      number,
+      T,
       BaseQueryFn<
         string | FetchArgs,
         unknown,
@@ -29,18 +29,19 @@ const useFetchPages = (
   >,
   onLoadSuccess: ActionCreatorWithPayload<any, any>,
   onLoadFail: ActionCreatorWithPayload<any, any>,
-  initialPageKey: number
+  getFetchArg: (nextPageKey: number | null) => T | null,
+  nextPage: number | null
 ) => {
   const [trigger, currentResult] = usePageQuery();
   const dispatch = useAppDispatch();
 
-  const hasNextPage =
-    currentResult.currentData?.hasNextPage ?? initialPageKey !== null;
-  const nextPageKey = currentResult.currentData?.nextPage ?? initialPageKey;
+  const hasNextPage = nextPage !== null;
+  const nextPageId = nextPage;
 
   const ref = useIntersect(async (entry, observer) => {
-    if (hasNextPage && !currentResult.isFetching) {
-      trigger(nextPageKey);
+    const fetchArg = getFetchArg(nextPageId)
+    if (hasNextPage && !currentResult.isFetching && fetchArg != null) {
+      trigger(fetchArg);
     }
   });
 
@@ -56,7 +57,7 @@ const useFetchPages = (
         })
       );
     } else if (isError) {
-      dispatch(onLoadFail);
+      dispatch(onLoadFail({}));
     }
   }, [currentResult, onLoadSuccess, onLoadFail, dispatch]);
 
