@@ -1,20 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { SearchPageState, INITIAL_PAGE } from '../../types/PageState';
+import {
+  SearchPageState,
+  LoadStateConst,
+  INITIAL_PAGE,
+} from '../../types/PageState';
 
 const initialState: SearchPageState = {
   pageState: {
     nextPage: INITIAL_PAGE,
     posts: [],
-    isSuccess: false,
-    isError: false,
+    refreshState: LoadStateConst.None,
+    appendState: LoadStateConst.None,
   },
-  query: "",
+  query: '',
 };
 
 const searchResultSlice = createSlice({
   name: 'searchResult',
   initialState,
   reducers: {
+    // TODO: Replace to right param and return value
+
     searchPostHeaderPageLoad: (state, action) => {
       const { nextPage, posts, isSuccess, isError } = action.payload;
       return {
@@ -22,9 +28,9 @@ const searchResultSlice = createSlice({
         pageState: {
           nextPage: nextPage,
           posts: [...state.pageState.posts, ...posts],
-          isSuccess: isSuccess,
-          isError: isError,
-        }
+          refreshState: LoadStateConst.Complete,
+          appendState: LoadStateConst.Complete,
+        },
       };
     },
     searchPostHeaderPageLoadFail: (state, action) => {
@@ -34,7 +40,7 @@ const searchResultSlice = createSlice({
           ...state.pageState,
           isSuccess: false,
           isError: true,
-        }
+        },
       };
     },
     resetSearchPostHeader: (state, action) => {
@@ -43,9 +49,13 @@ const searchResultSlice = createSlice({
         ...initialState,
         query: query,
       };
-    }
-  }
+    },
+  },
 });
 
 export { searchResultSlice };
-export const { searchPostHeaderPageLoad, searchPostHeaderPageLoadFail, resetSearchPostHeader } = searchResultSlice.actions;
+export const {
+  searchPostHeaderPageLoad,
+  searchPostHeaderPageLoadFail,
+  resetSearchPostHeader,
+} = searchResultSlice.actions;

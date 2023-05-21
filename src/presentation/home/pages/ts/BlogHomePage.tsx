@@ -10,19 +10,20 @@ import {
   postHeaderPageLoadFail,
 } from '../../../../application/redux/home/homeSlice';
 import { useAppSelector } from '../../../shared/hooks/reduxHooks';
+import { LoadStateConst } from '../../../../application/types/PageState';
 
 function BlogHomePage() {
   const homeResult = useAppSelector((state) => state.home);
   const getFetchArg = useCallback((pageId: number | null) => {
-    return pageId
-  }, [])
+    return pageId;
+  }, []);
 
   const ref = useFetchPages(
     useLazyGetPostHeadersQuery,
     postHeaderPageLoad,
     postHeaderPageLoadFail,
     getFetchArg,
-    homeResult.nextPage,
+    homeResult.nextPage
   );
 
   const posts: PostPreview[] = useMemo(() => {
@@ -35,10 +36,14 @@ function BlogHomePage() {
     };
   }, []);
 
+  // TODO: Replace to right state condition
   const renderPage = useCallback(() => {
-    if (homeResult.isSuccess) {
+    if (homeResult.refreshState == LoadStateConst.Complete) {
       return <BlogPostCardList posts={posts} cardLayout="HomeCardLayout" />;
-    } else if (homeResult.isError && posts.length === 0) {
+    } else if (
+      homeResult.refreshState == LoadStateConst.Error &&
+      posts.length === 0
+    ) {
       return <ErrorPage msg={errorPageProps.msg} />;
     } else {
       return <div> loading ... </div>;

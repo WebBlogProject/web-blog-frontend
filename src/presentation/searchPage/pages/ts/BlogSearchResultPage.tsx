@@ -6,59 +6,67 @@ import { BlogPostCardList } from '../../../shared/components/ts/BlogPostCardList
 import { KeywordPresenter } from '../../components/ts/KeywordPresenter';
 import { useLazyGetPostHeadersByKeywordQuery } from '../../../../application/redux/api/apiSlice';
 import { ErrorPage, ErrorPageProps } from '../../../pages/ts/ErrorPage';
-import { useAppDispatch, useAppSelector } from '../../../shared/hooks/reduxHooks';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../shared/hooks/reduxHooks';
 import { SearchQueryArgs } from '../../../../application/types/SearchQueryArgs';
 import { useFetchPages } from '../../../shared/hooks/useFetchPages';
 import {
   resetSearchPostHeader,
   searchPostHeaderPageLoad,
-  searchPostHeaderPageLoadFail
+  searchPostHeaderPageLoadFail,
 } from '../../../../application/redux/searchResult/searchResultSlice';
+import { LoadStateConst } from '../../../../application/types/PageState';
 
 function BlogSearchResultPage() {
   const dispatch = useAppDispatch();
   const [search] = useSearchParams();
   const query = search.get('q') ?? '';
 
-  const searchResult = useAppSelector((state) => state.searchResult)
-  const stateQuery = searchResult.query
-  const getFetchArg = useCallback((pageId: number | null) => {
-    return {pageId: pageId, keyword: query} as SearchQueryArgs
-  }, [query])
+  const searchResult = useAppSelector((state) => state.searchResult);
+  const stateQuery = searchResult.query;
+  const getFetchArg = useCallback(
+    (pageId: number | null) => {
+      return { pageId: pageId, keyword: query } as SearchQueryArgs;
+    },
+    [query]
+  );
 
   useEffect(() => {
-    if(stateQuery !== query) {
-      dispatch(resetSearchPostHeader({query: query}))
+    if (stateQuery !== query) {
+      dispatch(resetSearchPostHeader({ query: query }));
     }
-  }, [stateQuery, query, dispatch])
+  }, [stateQuery, query, dispatch]);
 
   const ref = useFetchPages(
     useLazyGetPostHeadersByKeywordQuery,
     searchPostHeaderPageLoad,
     searchPostHeaderPageLoadFail,
     getFetchArg,
-    searchResult.pageState.nextPage,
-  )
+    searchResult.pageState.nextPage
+  );
 
   const posts: PostPreview[] = useMemo(() => {
     return searchResult.pageState.posts.map(convertToPostPreview) ?? [];
   }, [searchResult]);
 
-  const errorPageProps: ErrorPageProps = useMemo(()=> {
+  const errorPageProps: ErrorPageProps = useMemo(() => {
     return {
       msg: '검색에 실패했습니다.',
     };
   }, []);
 
+  // TODO: Replace to right state condition
   const renderPage = useCallback(() => {
-    if (searchResult.pageState.isSuccess) {
+    if (searchResult.pageState.refreshState == LoadStateConst.Complete) {
       return (
         <div>
           <KeywordPresenter keyword={query} />
           <BlogPostCardList posts={posts} cardLayout="SearchResultCardLayout" />
         </div>
       );
-    } else if (searchResult.pageState.isError) {
+    } else if (searchResult.pageState.refreshState == LoadStateConst.Error) {
       return <ErrorPage msg={errorPageProps.msg} />;
     } else {
       return <div> loading ... </div>;
