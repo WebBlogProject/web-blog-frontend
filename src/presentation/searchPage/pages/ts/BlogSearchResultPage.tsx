@@ -16,6 +16,7 @@ import {
   resetSearchPostHeader,
   searchPostHeaderPageLoadComplete,
   searchPostHeaderPageLoadFail,
+  searchPostHeaderPageLoading,
 } from '../../../../application/redux/searchResult/searchResultSlice';
 import { LoadStateConst } from '../../../../application/types/PageState';
 
@@ -43,6 +44,7 @@ function BlogSearchResultPage() {
     useLazyGetPostHeadersByKeywordQuery,
     searchPostHeaderPageLoadComplete,
     searchPostHeaderPageLoadFail,
+    searchPostHeaderPageLoading,
     getFetchArg,
     searchResult.pageState.nextPage
   );

@@ -1,4 +1,7 @@
-import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+import {
+  ActionCreatorWithPayload,
+  ActionCreatorWithoutPayload,
+} from '@reduxjs/toolkit';
 import {
   BaseQueryFn,
   FetchArgs,
@@ -28,7 +31,8 @@ const useFetchPages = <T>(
     >
   >,
   onLoadSuccess: ActionCreatorWithPayload<any, any>,
-  onLoadFail: ActionCreatorWithPayload<any, any>,
+  onLoadFail: ActionCreatorWithoutPayload<any>,
+  onLoading: ActionCreatorWithoutPayload<any>,
   getFetchArg: (nextPageKey: number | null) => T | null,
   nextPage: number | null
 ) => {
@@ -39,9 +43,10 @@ const useFetchPages = <T>(
   const nextPageId = nextPage;
 
   const ref = useIntersect(async (entry, observer) => {
-    const fetchArg = getFetchArg(nextPageId)
+    const fetchArg = getFetchArg(nextPageId);
     if (hasNextPage && !currentResult.isFetching && fetchArg != null) {
       trigger(fetchArg);
+      dispatch(onLoading());
     }
   });
 
@@ -52,12 +57,10 @@ const useFetchPages = <T>(
         onLoadSuccess({
           nextPage: currentData.hasNextPage ? currentData.nextPage : null,
           posts: currentData.nextPosts,
-          isSuccess: true,
-          isError: false,
         })
       );
     } else if (isError) {
-      dispatch(onLoadFail({}));
+      dispatch(onLoadFail());
     }
   }, [currentResult, onLoadSuccess, onLoadFail, dispatch]);
 

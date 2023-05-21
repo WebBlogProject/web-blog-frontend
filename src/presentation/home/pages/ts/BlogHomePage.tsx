@@ -8,6 +8,7 @@ import { ErrorPage, ErrorPageProps } from '../../../pages/ts/ErrorPage';
 import {
   postHeaderPageLoadComplete,
   postHeaderPageLoadFail,
+  postHeaderPageLoading,
 } from '../../../../application/redux/home/homeSlice';
 import { useAppSelector } from '../../../shared/hooks/reduxHooks';
 import { LoadStateConst } from '../../../../application/types/PageState';
@@ -22,6 +23,7 @@ function BlogHomePage() {
     useLazyGetPostHeadersQuery,
     postHeaderPageLoadComplete,
     postHeaderPageLoadFail,
+    postHeaderPageLoading,
     getFetchArg,
     homeResult.nextPage
   );
