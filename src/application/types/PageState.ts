@@ -14,6 +14,27 @@ type SearchPageState = {
 
 type LoadState = (typeof LoadStateConst)[keyof typeof LoadStateConst];
 
+const isRefreshingState = (state: PageState) => {
+  return state.refreshState !== LoadStateConst.Complete;
+};
+
+const createPageStateForLoadState = (
+  state: PageState,
+  loadState: LoadState
+) => {
+  if (isRefreshingState(state)) {
+    return {
+      ...state,
+      refreshState: loadState,
+    } as PageState;
+  } else {
+    return {
+      ...state,
+      appendState: loadState,
+    } as PageState;
+  }
+};
+
 /**
  * This is mediator constant object for creating LoadState type
  * instead of using enum type directly.
@@ -29,4 +50,4 @@ const LoadStateConst = {
 
 export type { PageState, SearchPageState, LoadState };
 export const INITIAL_PAGE = 1;
-export { LoadStateConst };
+export { LoadStateConst, createPageStateForLoadState };

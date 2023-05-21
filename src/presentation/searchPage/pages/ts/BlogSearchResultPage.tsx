@@ -14,7 +14,7 @@ import { SearchQueryArgs } from '../../../../application/types/SearchQueryArgs';
 import { useFetchPages } from '../../../shared/hooks/useFetchPages';
 import {
   resetSearchPostHeader,
-  searchPostHeaderPageLoad,
+  searchPostHeaderPageLoadComplete,
   searchPostHeaderPageLoadFail,
 } from '../../../../application/redux/searchResult/searchResultSlice';
 import { LoadStateConst } from '../../../../application/types/PageState';
@@ -41,7 +41,7 @@ function BlogSearchResultPage() {
 
   const ref = useFetchPages(
     useLazyGetPostHeadersByKeywordQuery,
-    searchPostHeaderPageLoad,
+    searchPostHeaderPageLoadComplete,
     searchPostHeaderPageLoadFail,
     getFetchArg,
     searchResult.pageState.nextPage

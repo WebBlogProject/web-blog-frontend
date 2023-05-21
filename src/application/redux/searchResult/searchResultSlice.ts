@@ -3,6 +3,7 @@ import {
   SearchPageState,
   LoadStateConst,
   INITIAL_PAGE,
+  createPageStateForLoadState,
 } from '../../types/PageState';
 
 const initialState: SearchPageState = {
@@ -19,31 +20,39 @@ const searchResultSlice = createSlice({
   name: 'searchResult',
   initialState,
   reducers: {
-    // TODO: Replace to right param and return value
-
-    searchPostHeaderPageLoad: (state, action) => {
-      const { nextPage, posts, isSuccess, isError } = action.payload;
+    searchPostHeaderPageLoadComplete: (state, action) => {
+      const { nextPage, posts } = action.payload;
       return {
         ...state,
         pageState: {
+          ...createPageStateForLoadState(
+            state.pageState,
+            LoadStateConst.Complete
+          ),
           nextPage: nextPage,
           posts: [...state.pageState.posts, ...posts],
-          refreshState: LoadStateConst.Complete,
-          appendState: LoadStateConst.Complete,
         },
       };
     },
-    searchPostHeaderPageLoadFail: (state, action) => {
+    searchPostHeaderPageLoadFail: (state, _) => {
       return {
         ...state,
-        pageState: {
-          ...state.pageState,
-          isSuccess: false,
-          isError: true,
-        },
+        pageState: createPageStateForLoadState(
+          state.pageState,
+          LoadStateConst.Error
+        ),
       };
     },
-    resetSearchPostHeader: (state, action) => {
+    searchPostHeaderPageLoading: (state, _) => {
+      return {
+        ...state,
+        pageState: createPageStateForLoadState(
+          state.pageState,
+          LoadStateConst.Loading
+        ),
+      };
+    },
+    resetSearchPostHeader: (_, action) => {
       const { query } = action.payload;
       return {
         ...initialState,
@@ -55,7 +64,8 @@ const searchResultSlice = createSlice({
 
 export { searchResultSlice };
 export const {
-  searchPostHeaderPageLoad,
+  searchPostHeaderPageLoadComplete,
   searchPostHeaderPageLoadFail,
+  searchPostHeaderPageLoading,
   resetSearchPostHeader,
 } = searchResultSlice.actions;

@@ -6,7 +6,7 @@ import { PostPreview } from '../../../../application/types/PostPreview';
 import { useFetchPages } from '../../../shared/hooks/useFetchPages';
 import { ErrorPage, ErrorPageProps } from '../../../pages/ts/ErrorPage';
 import {
-  postHeaderPageLoad,
+  postHeaderPageLoadComplete,
   postHeaderPageLoadFail,
 } from '../../../../application/redux/home/homeSlice';
 import { useAppSelector } from '../../../shared/hooks/reduxHooks';
@@ -20,7 +20,7 @@ function BlogHomePage() {
 
   const ref = useFetchPages(
     useLazyGetPostHeadersQuery,
-    postHeaderPageLoad,
+    postHeaderPageLoadComplete,
     postHeaderPageLoadFail,
     getFetchArg,
     homeResult.nextPage
