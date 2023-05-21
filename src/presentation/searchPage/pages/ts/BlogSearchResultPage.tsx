@@ -18,7 +18,10 @@ import {
   searchPostHeaderPageLoadFail,
   searchPostHeaderPageLoading,
 } from '../../../../application/redux/searchResult/searchResultSlice';
-import { LoadStateConst } from '../../../../application/types/PageState';
+import {
+  LoadState,
+  LoadStateConst,
+} from '../../../../application/types/PageState';
 
 function BlogSearchResultPage() {
   const dispatch = useAppDispatch();
@@ -59,29 +62,54 @@ function BlogSearchResultPage() {
     };
   }, []);
 
-  // TODO: Replace to right state condition
-  const renderPage = useCallback(() => {
-    if (searchResult.pageState.refreshState == LoadStateConst.Complete) {
-      return (
-        <div>
-          <KeywordPresenter keyword={query} />
-          <BlogPostCardList posts={posts} cardLayout="SearchResultCardLayout" />
-        </div>
-      );
-    } else if (searchResult.pageState.refreshState == LoadStateConst.Error) {
-      return <ErrorPage msg={errorPageProps.msg} />;
-    } else {
-      return <div> loading ... </div>;
+  const showFooterLoadingSpinner = useCallback((appendState: LoadState) => {
+    switch (appendState) {
+      case LoadStateConst.Complete:
+      case LoadStateConst.None:
+        return <></>;
+      case LoadStateConst.Error:
+      case LoadStateConst.Loading:
+        // TODO: Show loading spinner
+        return <div> loading ... </div>;
     }
-  }, [searchResult, errorPageProps, posts, query]);
+  }, []);
 
-  return (
-    <div>
-      {renderPage()}
-      {/* if ref attributed tag is shown on the viewport,intersection observer senses it (releated to infinite scroll) */}
-      <div style={{ height: '1px' }} ref={ref} />
-    </div>
-  );
+  const renderPage = useCallback(() => {
+    const refreshState = searchResult.pageState.refreshState;
+    const appendState = searchResult.pageState.appendState;
+
+    switch (refreshState) {
+      case LoadStateConst.Complete:
+      case LoadStateConst.None:
+        return (
+          <div>
+            <KeywordPresenter keyword={query} />
+            <BlogPostCardList
+              posts={posts}
+              cardLayout="SearchResultCardLayout"
+            />
+            {showFooterLoadingSpinner(appendState)}
+
+            {/* If ref attributed tag is shown on the viewport,
+            intersection observer senses it (releated to infinite scroll) */}
+            <div style={{ height: '1px' }} ref={ref} />
+          </div>
+        );
+      case LoadStateConst.Error:
+        return <ErrorPage msg={errorPageProps.msg} />;
+      case LoadStateConst.Loading:
+        return <div> loading ... </div>;
+    }
+  }, [
+    searchResult,
+    errorPageProps,
+    posts,
+    query,
+    ref,
+    showFooterLoadingSpinner,
+  ]);
+
+  return renderPage();
 }
 
 export { BlogSearchResultPage };

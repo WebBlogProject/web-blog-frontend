@@ -11,7 +11,10 @@ import {
   postHeaderPageLoading,
 } from '../../../../application/redux/home/homeSlice';
 import { useAppSelector } from '../../../shared/hooks/reduxHooks';
-import { LoadStateConst } from '../../../../application/types/PageState';
+import {
+  LoadStateConst,
+  LoadState,
+} from '../../../../application/types/PageState';
 
 function BlogHomePage() {
   const homeResult = useAppSelector((state) => state.home);
@@ -38,27 +41,43 @@ function BlogHomePage() {
     };
   }, []);
 
-  // TODO: Replace to right state condition
-  const renderPage = useCallback(() => {
-    if (homeResult.refreshState == LoadStateConst.Complete) {
-      return <BlogPostCardList posts={posts} cardLayout="HomeCardLayout" />;
-    } else if (
-      homeResult.refreshState == LoadStateConst.Error &&
-      posts.length === 0
-    ) {
-      return <ErrorPage msg={errorPageProps.msg} />;
-    } else {
-      return <div> loading ... </div>;
+  const showFooterLoadingSpinner = useCallback((appendState: LoadState) => {
+    switch (appendState) {
+      case LoadStateConst.Complete:
+      case LoadStateConst.None:
+        return <></>;
+      case LoadStateConst.Error:
+      case LoadStateConst.Loading:
+        // TODO: Show loading spinner
+        return <div> loading ... </div>;
     }
-  }, [homeResult, errorPageProps, posts]);
+  }, []);
 
-  return (
-    <div>
-      {renderPage()}
-      {/* if ref attributed tag is shown on the viewport,intersection observer senses it (releated to infinite scroll) */}
-      <div style={{ height: '1px' }} ref={ref} />
-    </div>
-  );
+  const renderPage = useCallback(() => {
+    const refreshState = homeResult.refreshState;
+    const appendState = homeResult.appendState;
+
+    switch (refreshState) {
+      case LoadStateConst.Complete:
+      case LoadStateConst.None:
+        return (
+          <div>
+            <BlogPostCardList posts={posts} cardLayout="HomeCardLayout" />
+            {showFooterLoadingSpinner(appendState)}
+
+            {/* If ref attributed tag is shown on the viewport,
+              intersection observer senses it (releated to infinite scroll) */}
+            <div style={{ height: '1px' }} ref={ref} />
+          </div>
+        );
+      case LoadStateConst.Error:
+        return <ErrorPage msg={errorPageProps.msg} />;
+      case LoadStateConst.Loading:
+        return <div> loading ... </div>;
+    }
+  }, [homeResult, errorPageProps, posts, ref, showFooterLoadingSpinner]);
+
+  return renderPage();
 }
 
 export { BlogHomePage };
