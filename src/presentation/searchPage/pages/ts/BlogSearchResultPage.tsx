@@ -33,13 +33,7 @@ function BlogSearchResultPage() {
     [query]
   );
 
-  useEffect(() => {
-    if (stateQuery !== query) {
-      dispatch(resetSearchPostHeader({ query: query }));
-    }
-  }, [stateQuery, query, dispatch]);
-
-  const ref = useFetchPages(
+  const { ref, resetIntersectingState } = useFetchPages(
     useLazyGetPostHeadersByKeywordQuery,
     searchPostHeaderPageLoadComplete,
     searchPostHeaderPageLoadFail,
@@ -47,6 +41,13 @@ function BlogSearchResultPage() {
     getFetchArg,
     searchResult.pageState.nextPage
   );
+
+  useEffect(() => {
+    if (stateQuery !== query) {
+      dispatch(resetSearchPostHeader({ query: query }));
+      resetIntersectingState();
+    }
+  }, [stateQuery, query, dispatch, resetIntersectingState]);
 
   const posts: PostPreview[] = useMemo(() => {
     return searchResult.pageState.posts.map(convertToPostPreview) ?? [];

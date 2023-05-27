@@ -18,7 +18,7 @@ function BlogHomePage() {
     return pageId;
   }, []);
 
-  const ref = useFetchPages(
+  const { ref } = useFetchPages(
     useLazyGetPostHeadersQuery,
     postHeaderPageLoadComplete,
     postHeaderPageLoadFail,

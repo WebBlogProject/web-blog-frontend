@@ -10,7 +10,7 @@ import {
   QueryDefinition,
 } from '@reduxjs/toolkit/dist/query';
 import { UseLazyQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { PostHeaderPage } from '../../../application/types/PostHeaderPage';
 import { useAppDispatch } from './reduxHooks';
 import { useIntersect } from './useIntersect';
@@ -37,12 +37,27 @@ const useFetchPages = <T>(
   nextPage: number | null
 ) => {
   const [trigger, currentResult] = usePageQuery();
+  const [isIntersecting, setIsIntersecting] = useState(false);
   const dispatch = useAppDispatch();
 
   const hasNextPage = nextPage !== null;
   const nextPageId = nextPage;
 
   const ref = useIntersect(async (entry, observer) => {
+    const isEntryIntersecting = entry.isIntersecting;
+
+    // To prevent calling fetch infinitely, we need to check that intersecting state is changed or not.
+    // We need to try new fetch at error or loading case
+    // only when intersecting state is changed (invisible to visible).
+    if (!currentResult.isSuccess && isIntersecting === isEntryIntersecting) {
+      return;
+    }
+
+    setIsIntersecting(isEntryIntersecting);
+    if (!isEntryIntersecting) {
+      return;
+    }
+
     const fetchArg = getFetchArg(nextPageId);
     if (hasNextPage && !currentResult.isFetching && fetchArg != null) {
       trigger(fetchArg);
@@ -64,7 +79,11 @@ const useFetchPages = <T>(
     }
   }, [currentResult, onLoadSuccess, onLoadFail, dispatch]);
 
-  return ref;
+  const resetIntersectingState = useCallback(() => {
+    setIsIntersecting(false);
+  }, [setIsIntersecting]);
+
+  return { ref, resetIntersectingState };
 };
 
 export { useFetchPages };
