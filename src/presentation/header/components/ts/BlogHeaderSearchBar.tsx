@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/BlogHeaderSearchBar.css';
-import loupeImage from '../../../../assets/loupeSmall.png';
+import { ReactComponent as LoupeImage } from '../../../../assets/loupe.svg';
 
 function BlogHeaderSearchBar() {
   const [query, setQuery] = useState('');
@@ -23,16 +23,12 @@ function BlogHeaderSearchBar() {
   }, [routerNavigate, searchResultPageUrl]);
 
   return (
-    <div className="BlogHeaderSearchBar">
+    <div className="BlogSearchBar">
+      <button className="BlogSearchBar-button" onClick={onClickSearchButton}>
+        <LoupeImage />
+      </button>
       <input
-        className="BlogHeaderSearchBar-loupe"
-        type="image"
-        src={loupeImage}
-        alt="Search Button"
-        onClick={onClickSearchButton}
-      />
-      <input
-        className="BlogHeaderSearchBar-input"
+        className="BlogSearchBar-input"
         type="search"
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={searchIfEnter}

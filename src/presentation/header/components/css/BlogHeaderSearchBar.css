@@ -1,23 +1,44 @@
-.BlogHeaderSearchBar {
-  display: inline-block;
-  margin: 3px 3px 3px auto;
-  border: 1px solid;
-  border-radius: 5px;
-  width: 15rem;
+/*
+* Styles from below are copy of gh-content style of Ghost casper.
+*/
+
+.BlogSearchBar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+  text-align: right;
 }
 
-.BlogHeaderSearchBar-loupe {
-  margin-left: 1%;
-  vertical-align: middle;
-  width: 7%;
-}
-
-.BlogHeaderSearchBar-input {
-  vertical-align: middle;
+.BlogSearchBar-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  cursor: pointer;
+  background-color: transparent;
   border: 0;
-  outline: 0;
-  width: 92%;
-  background-color: #f8f8f8;
-  /* To ignore default style of App.css */
-  box-sizing: border-box !important;
+  outline: none;
+}
+
+.BlogSearchBar-button:hover {
+  opacity: 0.9;
+}
+
+.BlogSearchBar-input {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 20px;
+  height: 30px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  font-size: 1.6rem;
+  border-radius: 48px;
+  color: var(--color-darkgrey);
+  background: #fff;
+  border: 1px solid black;
 }
