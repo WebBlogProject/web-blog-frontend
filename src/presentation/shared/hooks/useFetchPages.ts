@@ -60,7 +60,7 @@ const useFetchPages = <T>(
 
     const fetchArg = getFetchArg(nextPageId);
     if (hasNextPage && !currentResult.isFetching && fetchArg != null) {
-      trigger(fetchArg);
+      trigger(fetchArg, true);
       dispatch(onLoading());
     }
   });
