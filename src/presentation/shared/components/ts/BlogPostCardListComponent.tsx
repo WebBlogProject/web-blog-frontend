@@ -25,22 +25,25 @@ function BlogPostCardListComponent({
   errorPageProps,
   fetchBoundaryReference,
 }: BlogPostCardListComponentProps) {
-  const showBlogCardList = useCallback(() => {
-    return (
-      <div className={cardLayout}>
-        {posts.map((post: PostPreview) => (
-          <BlogPostCard
-            id={post.id}
-            title={post.title}
-            creationDate={post.creationDate}
-            estimatedTimeToRead={post.estimatedTimeToRead}
-            thumbnailUrl={post.thumbnailUrl}
-            key={post.id}
-          />
-        ))}
-      </div>
-    );
-  }, [posts, cardLayout]);
+  const showBlogCardList = useCallback(
+    (posts: PostPreview[]) => {
+      return (
+        <div className={cardLayout}>
+          {posts.map((post: PostPreview) => (
+            <BlogPostCard
+              id={post.id}
+              title={post.title}
+              creationDate={post.creationDate}
+              estimatedTimeToRead={post.estimatedTimeToRead}
+              thumbnailUrl={post.thumbnailUrl}
+              key={post.id}
+            />
+          ))}
+        </div>
+      );
+    },
+    [cardLayout]
+  );
 
   const showFooterLoadingSpinner = useCallback((appendState: LoadState) => {
     switch (appendState) {
@@ -60,7 +63,12 @@ function BlogPostCardListComponent({
       case LoadStateConst.None:
         return (
           <div>
-            {showBlogCardList()}
+            {posts.length === 0 && refreshState === LoadStateConst.Complete ? (
+              // TODO: Show empty view
+              <div>Empty view</div>
+            ) : (
+              showBlogCardList(posts)
+            )}
             {showFooterLoadingSpinner(appendState)}
 
             {/* If ref attributed tag is shown on the viewport,
@@ -80,6 +88,7 @@ function BlogPostCardListComponent({
     refreshState,
     appendState,
     showBlogCardList,
+    posts,
   ]);
 
   return render();
