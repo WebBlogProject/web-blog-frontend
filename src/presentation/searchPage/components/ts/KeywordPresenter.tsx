@@ -1,5 +1,5 @@
-import loupeImage from '../../../../assets/loupeSmall.png';
 import '../css/KeywordPresenter.css';
+import { ReactComponent as LoupeImage } from '../../../../assets/loupe.svg';
 
 type KeywordPresenterProps = {
   keyword: string;
@@ -8,11 +8,11 @@ type KeywordPresenterProps = {
 function KeywordPresenter({ keyword }: KeywordPresenterProps) {
   return (
     <div className="KeywordPresenter">
-      <div className="KeywordHeader">
-        <div>검색 결과</div>
-        <img className="loupe" src={loupeImage} alt="Search Button" />
+      <h2 className="KeywordHeader">검색 결과</h2>
+      <div className="Keyword">
+        <LoupeImage />
+        <h4>{keyword}</h4>
       </div>
-      <div className="Keyword">{keyword}</div>
     </div>
   );
 }
