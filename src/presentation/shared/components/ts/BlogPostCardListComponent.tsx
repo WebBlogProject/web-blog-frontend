@@ -49,7 +49,7 @@ function BlogPostCardListComponent({
     switch (appendState) {
       case LoadStateConst.Complete:
       case LoadStateConst.None:
-        return <></>;
+        return;
       case LoadStateConst.Error:
       case LoadStateConst.Loading:
         // TODO: Show loading spinner
@@ -72,7 +72,7 @@ function BlogPostCardListComponent({
             {showFooterLoadingSpinner(appendState)}
 
             {/* If ref attributed tag is shown on the viewport,
-            intersection observer senses it (releated to infinite scroll) */}
+            intersection observer senses it (related to infinite scroll) */}
             <div style={{ height: '1px' }} ref={fetchBoundaryReference} />
           </div>
         );
