@@ -37,24 +37,27 @@ const useFetchPages = <T>(
   nextPage: number | null
 ) => {
   const [trigger, currentResult] = usePageQuery();
-  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [prevIntersectingState, setPrevIntersectingState] = useState(false);
   const dispatch = useAppDispatch();
 
   const hasNextPage = nextPage !== null;
   const nextPageId = nextPage;
 
   const ref = useIntersect(async (entry, observer) => {
-    const isEntryIntersecting = entry.isIntersecting;
+    const isCurrentIntersecting = entry.isIntersecting;
 
     // To prevent calling fetch infinitely, we need to check that intersecting state is changed or not.
     // We need to try new fetch at error or loading case
     // only when intersecting state is changed (invisible to visible).
-    if (!currentResult.isSuccess && isIntersecting === isEntryIntersecting) {
+    if (
+      !currentResult.isSuccess &&
+      prevIntersectingState === isCurrentIntersecting
+    ) {
       return;
     }
 
-    setIsIntersecting(isEntryIntersecting);
-    if (!isEntryIntersecting) {
+    setPrevIntersectingState(isCurrentIntersecting);
+    if (!isCurrentIntersecting) {
       return;
     }
 
@@ -80,8 +83,8 @@ const useFetchPages = <T>(
   }, [currentResult, onLoadSuccess, onLoadFail, dispatch]);
 
   const resetIntersectingState = useCallback(() => {
-    setIsIntersecting(false);
-  }, [setIsIntersecting]);
+    setPrevIntersectingState(false);
+  }, [setPrevIntersectingState]);
 
   return { ref, resetIntersectingState };
 };
