@@ -1,3 +1,9 @@
+/**
+* Styles in this file are modification of global.css and screen.css in TryGhost/Casper.
+* Link of original file and code are attached to each style code.
+* Original license: https://github.com/TryGhost/Casper/blob/main/LICENSE
+*/
+
 .KeywordPresenter {
   flex-wrap: wrap;
   width: 85%;
