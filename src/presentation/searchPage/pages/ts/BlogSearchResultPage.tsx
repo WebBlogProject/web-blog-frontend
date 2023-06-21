@@ -2,17 +2,21 @@ import { useSearchParams } from 'react-router-dom';
 import { convertToPostPreview } from '../../../../application/mappers/postHeaderMappers';
 import { PostPreview } from '../../../../application/types/PostPreview';
 import { useCallback, useEffect, useMemo } from 'react';
-import { BlogPostCardList } from '../../../shared/components/ts/BlogPostCardList';
+import { BlogPostCardListComponent } from '../../../shared/components/ts/BlogPostCardListComponent';
 import { KeywordPresenter } from '../../components/ts/KeywordPresenter';
 import { useLazyGetPostHeadersByKeywordQuery } from '../../../../application/redux/api/apiSlice';
-import { ErrorPage, ErrorPageProps } from '../../../pages/ts/ErrorPage';
-import { useAppDispatch, useAppSelector } from '../../../shared/hooks/reduxHooks';
+import { ErrorPageProps } from '../../../pages/ts/ErrorPage';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../shared/hooks/reduxHooks';
 import { SearchQueryArgs } from '../../../../application/types/SearchQueryArgs';
 import { useFetchPages } from '../../../shared/hooks/useFetchPages';
 import {
   resetSearchPostHeader,
-  searchPostHeaderPageLoad,
-  searchPostHeaderPageLoadFail
+  searchPostHeaderPageLoadComplete,
+  searchPostHeaderPageLoadFail,
+  searchPostHeaderPageLoading,
 } from '../../../../application/redux/searchResult/searchResultSlice';
 
 function BlogSearchResultPage() {
@@ -20,56 +24,52 @@ function BlogSearchResultPage() {
   const [search] = useSearchParams();
   const query = search.get('q') ?? '';
 
-  const searchResult = useAppSelector((state) => state.searchResult)
-  const stateQuery = searchResult.query
-  const getFetchArg = useCallback((pageId: number | null) => {
-    return {pageId: pageId, keyword: query} as SearchQueryArgs
-  }, [query])
+  const searchResult = useAppSelector((state) => state.searchResult);
+  const stateQuery = searchResult.query;
+  const getFetchArg = useCallback(
+    (pageId: number | null) => {
+      return { pageId: pageId, keyword: query } as SearchQueryArgs;
+    },
+    [query]
+  );
+
+  const { ref, resetIntersectingState } = useFetchPages(
+    useLazyGetPostHeadersByKeywordQuery,
+    searchPostHeaderPageLoadComplete,
+    searchPostHeaderPageLoadFail,
+    searchPostHeaderPageLoading,
+    getFetchArg,
+    searchResult.pageState.nextPage
+  );
 
   useEffect(() => {
-    if(stateQuery !== query) {
-      dispatch(resetSearchPostHeader({query: query}))
+    if (stateQuery !== query) {
+      dispatch(resetSearchPostHeader({ query: query }));
+      resetIntersectingState();
     }
-  }, [stateQuery, query, dispatch])
-
-  const ref = useFetchPages(
-    useLazyGetPostHeadersByKeywordQuery,
-    searchPostHeaderPageLoad,
-    searchPostHeaderPageLoadFail,
-    getFetchArg,
-    searchResult.pageState.nextPage,
-  )
+  }, [stateQuery, query, dispatch, resetIntersectingState]);
 
   const posts: PostPreview[] = useMemo(() => {
     return searchResult.pageState.posts.map(convertToPostPreview) ?? [];
   }, [searchResult]);
 
-  const errorPageProps: ErrorPageProps = useMemo(()=> {
+  const errorPageProps: ErrorPageProps = useMemo(() => {
     return {
       msg: '검색에 실패했습니다.',
     };
   }, []);
 
-  const renderPage = useCallback(() => {
-    if (searchResult.pageState.isSuccess) {
-      return (
-        <div>
-          <KeywordPresenter keyword={query} />
-          <BlogPostCardList posts={posts} cardLayout="SearchResultCardLayout" />
-        </div>
-      );
-    } else if (searchResult.pageState.isError) {
-      return <ErrorPage msg={errorPageProps.msg} />;
-    } else {
-      return <div> loading ... </div>;
-    }
-  }, [searchResult, errorPageProps, posts, query]);
-
   return (
     <div>
-      {renderPage()}
-      {/* if ref attributed tag is shown on the viewport,intersection observer senses it (releated to infinite scroll) */}
-      <div style={{ height: '1px' }} ref={ref} />
+      <KeywordPresenter keyword={query} />
+      <BlogPostCardListComponent
+        posts={posts}
+        cardLayout="SearchResultCardLayout"
+        refreshState={searchResult.pageState.refreshState}
+        appendState={searchResult.pageState.appendState}
+        errorPageProps={errorPageProps}
+        fetchBoundaryReference={ref}
+      />
     </div>
   );
 }
