@@ -1,5 +1,5 @@
 import { getFormattedDate } from '../../../shared/utils/PostUtils';
-import { BlogPostHeaderTagItem } from './BlogPostHeaderTagItem';
+import { BlogPostHeaderTagItem } from '../../../shared/components/ts/BlogPostHeaderTagItem';
 import { Tag } from '../../../../application/types/Tag';
 import '../css/BlogPostHeader.css';
 

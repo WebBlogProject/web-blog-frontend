@@ -1,16 +1,16 @@
 import '../css/BlogPostCardList.css';
 import { BlogPostCard } from './BlogPostCard';
-import { PostPreview } from '../../../../application/types/PostPreview';
+import { PostHeaderData } from '../../../../application/types/PostHeaderData';
 
 type BlogPostCardListProps = {
-  posts: PostPreview[];
+  posts: PostHeaderData[];
   cardLayout: string;
 };
 
 function BlogPostCardList({ posts, cardLayout }: BlogPostCardListProps) {
   return (
     <div className={cardLayout}>
-      {posts.map((post: PostPreview) => (
+      {posts.map((post: PostHeaderData) => (
         <BlogPostCard
           id={post.id}
           title={post.title}

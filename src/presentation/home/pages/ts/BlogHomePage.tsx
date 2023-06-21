@@ -1,8 +1,6 @@
 import { BlogPostCardList } from '../../../shared/components/ts/BlogPostCardList';
-import { convertToPostPreview } from '../../../../application/mappers/postHeaderMappers';
 import { useLazyGetPostHeadersQuery } from '../../../../application/redux/api/apiSlice';
 import { useCallback, useMemo } from 'react';
-import { PostPreview } from '../../../../application/types/PostPreview';
 import { useFetchPages } from '../../../shared/hooks/useFetchPages';
 import { ErrorPage, ErrorPageProps } from '../../../pages/ts/ErrorPage';
 import {
@@ -14,20 +12,16 @@ import { useAppSelector } from '../../../shared/hooks/reduxHooks';
 function BlogHomePage() {
   const homeResult = useAppSelector((state) => state.home);
   const getFetchArg = useCallback((pageId: number | null) => {
-    return pageId
-  }, [])
+    return pageId;
+  }, []);
 
   const ref = useFetchPages(
     useLazyGetPostHeadersQuery,
     postHeaderPageLoad,
     postHeaderPageLoadFail,
     getFetchArg,
-    homeResult.nextPage,
+    homeResult.nextPage
   );
-
-  const posts: PostPreview[] = useMemo(() => {
-    return homeResult.posts.map(convertToPostPreview) ?? [];
-  }, [homeResult]);
 
   const errorPageProps: ErrorPageProps = useMemo(() => {
     return {
@@ -37,13 +31,18 @@ function BlogHomePage() {
 
   const renderPage = useCallback(() => {
     if (homeResult.isSuccess) {
-      return <BlogPostCardList posts={posts} cardLayout="HomeCardLayout" />;
-    } else if (homeResult.isError && posts.length === 0) {
+      return (
+        <BlogPostCardList
+          posts={homeResult.posts}
+          cardLayout="HomeCardLayout"
+        />
+      );
+    } else if (homeResult.isError && homeResult.posts.length === 0) {
       return <ErrorPage msg={errorPageProps.msg} />;
     } else {
       return <div> loading ... </div>;
     }
-  }, [homeResult, errorPageProps, posts]);
+  }, [homeResult, errorPageProps]);
 
   return (
     <div>
