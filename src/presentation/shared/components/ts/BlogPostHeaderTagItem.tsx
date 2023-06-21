@@ -5,7 +5,7 @@ type BlogPostHeaderTagItemProps = {
 };
 
 function BlogPostHeaderTagItem({ tagName }: BlogPostHeaderTagItemProps) {
-  return <div className="BlogPostHeaderTagItem">{tagName}</div>;
+  return <span className="BlogPostHeaderTagItem">{tagName}</span>;
 }
 
 export { BlogPostHeaderTagItem };

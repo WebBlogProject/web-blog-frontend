@@ -18,6 +18,7 @@ function BlogPostCardList({ posts, cardLayout }: BlogPostCardListProps) {
           estimatedTimeToRead={post.estimatedTimeToRead}
           thumbnailUrl={post.thumbnailUrl}
           key={post.id}
+          tagList={post.tagList}
         />
       ))}
     </div>
