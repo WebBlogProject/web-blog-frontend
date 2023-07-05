@@ -1,13 +1,7 @@
-.Post-card {
-  display: flex;
-  flex-direction: column;
-  border-radius: 1.5vw;
-  color: #333;
-  margin: 10px;
-  cursor: pointer;
-  border: 1px solid black;
-}
-
+/**
+* Copy or variation of .gh-canvas > * style of screen.css.
+* Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L866
+*/
 .post-card {
   position: relative;
   grid-column: span 2;
@@ -18,25 +12,12 @@
   cursor: pointer;
 }
 
-.Card-content {
-  height: 5vw;
-  padding: 1vw;
-  font-family: 'Georgia';
-}
+/**
+* Copy or variation of .gh-canvas > * style of screen.css.
+* Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L1028
+*/
 
-.Card-content h3 {
-  margin: auto;
-  padding: 0.5vw;
-  text-align: left;
-  font-size: 2vw;
-}
-
-.Card-content div {
-  padding: 0.5vw;
-  font-size: 1.5vw;
-}
-
-.post-card-meta {
+.PostCard-meta {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -46,20 +27,30 @@
   color: var(--color-secondary-text);
 }
 
-.post-card-meta > * {
+.PostCard-meta > * {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.post-card-title {
+/**
+* Copy or variation of .gh-canvas > * style of screen.css.
+* Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L973
+*/
+
+.PostCard-title {
   margin: 0;
   font-size: 2.6rem;
   font-weight: 800;
   line-height: 1.2;
 }
 
-.post-card-image {
+/**
+* Copy or variation of .gh-canvas > * style of screen.css.
+* Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L903
+*/
+
+.PostCard-image {
   position: relative;
   inset: 0;
   width: 100%;

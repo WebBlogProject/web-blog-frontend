@@ -9,7 +9,7 @@ type BlogPostCardListProps = {
 
 function BlogPostCardList({ posts, cardLayout }: BlogPostCardListProps) {
   return (
-    <div className={cardLayout + ' post-feed'}>
+    <div className={cardLayout + ' Post-feed'}>
       {posts.map((post: PostHeaderData, index) => (
         <BlogPostCard
           id={post.id}
@@ -22,8 +22,8 @@ function BlogPostCardList({ posts, cardLayout }: BlogPostCardListProps) {
           cardSize={
             index < 3 && cardLayout === 'HomeCardLayout'
               ? index === 0
-                ? 'large'
-                : 'medium'
+                ? 'Large'
+                : 'Medium'
               : 'small'
           }
         />

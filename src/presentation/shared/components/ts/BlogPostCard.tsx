@@ -34,22 +34,22 @@ function BlogPostCard({
   return (
     <article className={'post-card ' + cardSize} onClick={onClickPostCard}>
       <img
-        className="post-card-image"
+        className="PostCard-image"
         src={thumbnailUrl}
         alt={`${title}_thumbnail`}
       />
-      <div className="post-card-content">
-        <header className="post-card-header">
+      <div className="PostCard-Content">
+        <header className="PostCard-Header">
           {tagList.map((tag) => (
             <BlogPostHeaderTagItem tagName={tag.tagName} key={tag.tagId} />
           ))}
-          <h2 className="post-card-title">{title}</h2>
+          <h2 className="PostCard-title">{title}</h2>
         </header>
-        <footer className="post-card-meta">
-          <time className="post-card-meta-data">
+        <footer className="PostCard-meta">
+          <time className="PostCard-meta-data">
             {getFormattedDate(creationDate)}
           </time>
-          <span className="post-card-meta-length">
+          <span className="PostCard-meta-length">
             {estimatedTimeToRead} min read
           </span>
         </footer>
