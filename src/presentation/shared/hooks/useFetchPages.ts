@@ -1,4 +1,7 @@
-import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+import {
+  ActionCreatorWithPayload,
+  ActionCreatorWithoutPayload,
+} from '@reduxjs/toolkit';
 import {
   BaseQueryFn,
   FetchArgs,
@@ -7,7 +10,7 @@ import {
   QueryDefinition,
 } from '@reduxjs/toolkit/dist/query';
 import { UseLazyQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { PostHeaderPage } from '../../../application/types/PostHeaderPage';
 import { useAppDispatch } from './reduxHooks';
 import { useIntersect } from './useIntersect';
@@ -28,20 +31,40 @@ const useFetchPages = <T>(
     >
   >,
   onLoadSuccess: ActionCreatorWithPayload<any, any>,
-  onLoadFail: ActionCreatorWithPayload<any, any>,
+  onLoadFail: ActionCreatorWithoutPayload<any>,
+  onLoading: ActionCreatorWithoutPayload<any>,
   getFetchArg: (nextPageKey: number | null) => T | null,
   nextPage: number | null
 ) => {
   const [trigger, currentResult] = usePageQuery();
+  const [prevIntersectingState, setPrevIntersectingState] = useState(false);
   const dispatch = useAppDispatch();
 
   const hasNextPage = nextPage !== null;
   const nextPageId = nextPage;
 
   const ref = useIntersect(async (entry, observer) => {
-    const fetchArg = getFetchArg(nextPageId)
+    const isCurrentIntersecting = entry.isIntersecting;
+
+    // To prevent calling fetch infinitely, we need to check that intersecting state is changed or not.
+    // We need to try new fetch at error or loading case
+    // only when intersecting state is changed (invisible to visible).
+    if (
+      !currentResult.isSuccess &&
+      prevIntersectingState === isCurrentIntersecting
+    ) {
+      return;
+    }
+
+    setPrevIntersectingState(isCurrentIntersecting);
+    if (!isCurrentIntersecting) {
+      return;
+    }
+
+    const fetchArg = getFetchArg(nextPageId);
     if (hasNextPage && !currentResult.isFetching && fetchArg != null) {
-      trigger(fetchArg);
+      trigger(fetchArg, true);
+      dispatch(onLoading());
     }
   });
 
@@ -52,16 +75,18 @@ const useFetchPages = <T>(
         onLoadSuccess({
           nextPage: currentData.hasNextPage ? currentData.nextPage : null,
           posts: currentData.nextPosts,
-          isSuccess: true,
-          isError: false,
         })
       );
     } else if (isError) {
-      dispatch(onLoadFail({}));
+      dispatch(onLoadFail());
     }
   }, [currentResult, onLoadSuccess, onLoadFail, dispatch]);
 
-  return ref;
+  const resetIntersectingState = useCallback(() => {
+    setPrevIntersectingState(false);
+  }, [setPrevIntersectingState]);
+
+  return { ref, resetIntersectingState };
 };
 
 export { useFetchPages };

@@ -1,36 +1,42 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { PageState, INITIAL_PAGE } from '../../types/PageState';
+import {
+  PageState,
+  LoadStateConst,
+  INITIAL_PAGE,
+  createPageStateForLoadState,
+} from '../../types/PageState';
 
 const initialState: PageState = {
   nextPage: INITIAL_PAGE,
   posts: [],
-  isSuccess: false,
-  isError: false,
+  refreshState: LoadStateConst.None,
+  appendState: LoadStateConst.None,
 };
 
 const homeSlice = createSlice({
   name: 'home',
   initialState,
   reducers: {
-    postHeaderPageLoad: (state, action) => {
-      const { nextPage, posts, isSuccess, isError } = action.payload;
+    postHeaderPageLoadComplete: (state, action) => {
+      const { nextPage, posts } = action.payload;
       return {
-        ...state,
+        ...createPageStateForLoadState(state, LoadStateConst.Complete),
         nextPage: nextPage,
         posts: [...state.posts, ...posts],
-        isSuccess: isSuccess,
-        isError: isError,
       };
     },
-    postHeaderPageLoadFail: (state, action) => {
-      return {
-        ...state,
-        isSuccess: false,
-        isError: true,
-      };
+    postHeaderPageLoadFail: (state, _) => {
+      return createPageStateForLoadState(state, LoadStateConst.Error);
+    },
+    postHeaderPageLoading: (state, _) => {
+      return createPageStateForLoadState(state, LoadStateConst.Loading);
     },
   },
 });
 
 export { homeSlice };
-export const { postHeaderPageLoad, postHeaderPageLoadFail } = homeSlice.actions;
+export const {
+  postHeaderPageLoadComplete,
+  postHeaderPageLoadFail,
+  postHeaderPageLoading,
+} = homeSlice.actions;

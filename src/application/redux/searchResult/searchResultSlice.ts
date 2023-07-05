@@ -1,51 +1,71 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { SearchPageState, INITIAL_PAGE } from '../../types/PageState';
+import {
+  SearchPageState,
+  LoadStateConst,
+  INITIAL_PAGE,
+  createPageStateForLoadState,
+} from '../../types/PageState';
 
 const initialState: SearchPageState = {
   pageState: {
     nextPage: INITIAL_PAGE,
     posts: [],
-    isSuccess: false,
-    isError: false,
+    refreshState: LoadStateConst.None,
+    appendState: LoadStateConst.None,
   },
-  query: "",
+  query: '',
 };
 
 const searchResultSlice = createSlice({
   name: 'searchResult',
   initialState,
   reducers: {
-    searchPostHeaderPageLoad: (state, action) => {
-      const { nextPage, posts, isSuccess, isError } = action.payload;
+    searchPostHeaderPageLoadComplete: (state, action) => {
+      const { nextPage, posts } = action.payload;
       return {
         ...state,
         pageState: {
+          ...createPageStateForLoadState(
+            state.pageState,
+            LoadStateConst.Complete
+          ),
           nextPage: nextPage,
           posts: [...state.pageState.posts, ...posts],
-          isSuccess: isSuccess,
-          isError: isError,
-        }
+        },
       };
     },
-    searchPostHeaderPageLoadFail: (state, action) => {
+    searchPostHeaderPageLoadFail: (state, _) => {
       return {
         ...state,
-        pageState: {
-          ...state.pageState,
-          isSuccess: false,
-          isError: true,
-        }
+        pageState: createPageStateForLoadState(
+          state.pageState,
+          LoadStateConst.Error
+        ),
       };
     },
-    resetSearchPostHeader: (state, action) => {
+    searchPostHeaderPageLoading: (state, _) => {
+      return {
+        ...state,
+        pageState: createPageStateForLoadState(
+          state.pageState,
+          LoadStateConst.Loading
+        ),
+      };
+    },
+    resetSearchPostHeader: (_, action) => {
       const { query } = action.payload;
       return {
         ...initialState,
         query: query,
       };
-    }
-  }
+    },
+  },
 });
 
 export { searchResultSlice };
-export const { searchPostHeaderPageLoad, searchPostHeaderPageLoadFail, resetSearchPostHeader } = searchResultSlice.actions;
+export const {
+  searchPostHeaderPageLoadComplete,
+  searchPostHeaderPageLoadFail,
+  searchPostHeaderPageLoading,
+  resetSearchPostHeader,
+} = searchResultSlice.actions;
