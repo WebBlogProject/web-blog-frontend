@@ -5,7 +5,7 @@
       "title": "Blog 1",
       "creationDate": 1000,
       "estimatedTimeToRead": 3,
-      "thumbnailUrl": "someUrl.png",
+      "thumbnailUrl": "/postCardSampleImg.png",
       "tagList": [
         {
           "tagId": 1,
@@ -18,7 +18,7 @@
       "title": "Blog 2",
       "creationDate": 1000,
       "estimatedTimeToRead": 3,
-      "thumbnailUrl": "someUrl.png",
+      "thumbnailUrl": "/headerSampleImage.png",
       "tagList": [
         {
           "tagId": 1,
@@ -28,10 +28,10 @@
     },
     {
       "id": 3,
-      "title": "Blog 3",
+      "title": "very very very extremely long blog name",
       "creationDate": 1000,
       "estimatedTimeToRead": 3,
-      "thumbnailUrl": "someUrl.png",
+      "thumbnailUrl": "/headerSampleImage.png",
       "tagList": [
         {
           "tagId": 1,
@@ -44,7 +44,7 @@
       "title": "Blog 4",
       "creationDate": 1000,
       "estimatedTimeToRead": 3,
-      "thumbnailUrl": "someUrl.png",
+      "thumbnailUrl": "/postCardSampleImg.png",
       "tagList": [
         {
           "tagId": 1,
@@ -57,7 +57,7 @@
       "title": "Blog 5",
       "creationDate": 1000,
       "estimatedTimeToRead": 3,
-      "thumbnailUrl": "someUrl.png",
+      "thumbnailUrl": "/headerSampleImage.png",
       "tagList": [
         {
           "tagId": 1,
@@ -70,7 +70,7 @@
       "title": "Blog 6",
       "creationDate": 1000,
       "estimatedTimeToRead": 3,
-      "thumbnailUrl": "someUrl.png",
+      "thumbnailUrl": "/postCardSampleImg.png",
       "tagList": [
         {
           "tagId": 1,
