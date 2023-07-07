@@ -1,20 +1,28 @@
+/**
+* Styles in this file are modification of global.css and screen.css in TryGhost/Casper.
+* Link of original file and code are attached to each style code.
+* Original license: https://github.com/TryGhost/Casper/blob/main/LICENSE
+*/
+
 .KeywordPresenter {
   flex-wrap: wrap;
   width: 85%;
   margin: 1em auto 0 auto;
-  border-bottom: solid;
-}
-.KeywordHeader {
-  display: flex;
-  margin: 0.1em;
 }
 
-.KeywordHeader .loupe {
-  height: 1em;
-  width: auto;
-  margin: 0.1em 0 0 0.2em;
+.KeywordHeader {
+  margin-top: 30px;
+  font-size: 4.4rem;
 }
 
 .Keyword {
-  margin: 0.1em;
+  display: flex;
+  align-items: center;
+  width: auto;
+  margin: 0.1em 0 0 0.2em;
+  border-bottom: solid;
+}
+
+.Keyword h4 {
+  margin: 0;
 }

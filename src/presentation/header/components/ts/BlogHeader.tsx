@@ -13,13 +13,16 @@ function BlogHeader() {
   }, [routerNavigate]);
 
   return (
-    <div className="BlogHeader">
-      <div className="BlogName" onClick={onClickSearchButton}>
-        {blogName}
+    <header className="BlogHead">
+      <div className="BlogHead-inner">
+        <nav className="BlogHead-menu" onClick={onClickSearchButton}>
+          <ul className="nav">
+            <li>{blogName}</li>
+          </ul>
+        </nav>
+        <BlogHeaderSearchBar />
       </div>
-      <BlogHeaderSearchBar />
-      <hr />
-    </div>
+    </header>
   );
 }
 
