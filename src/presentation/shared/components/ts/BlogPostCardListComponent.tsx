@@ -37,6 +37,7 @@ function BlogPostCardListComponent({
               estimatedTimeToRead={post.estimatedTimeToRead}
               thumbnailUrl={post.thumbnailUrl}
               key={post.id}
+              tagList={post.tagList}
             />
           ))}
         </div>

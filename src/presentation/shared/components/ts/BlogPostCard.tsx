@@ -1,8 +1,8 @@
-import '../css/BlogPostCard.css';
-
 import { getFormattedDate } from '../../utils/PostUtils';
 import { useNavigate } from 'react-router-dom';
 import { useCallback } from 'react';
+import { Tag } from '../../../../application/types/Tag';
+import { BlogPostHeaderTagItem } from './BlogPostHeaderTagItem';
 
 type BlogPostCardProps = {
   id: number;
@@ -10,6 +10,7 @@ type BlogPostCardProps = {
   creationDate: number;
   estimatedTimeToRead: number;
   thumbnailUrl: string;
+  tagList: Tag[];
 };
 
 function BlogPostCard({
@@ -18,6 +19,7 @@ function BlogPostCard({
   creationDate,
   estimatedTimeToRead,
   thumbnailUrl,
+  tagList,
 }: BlogPostCardProps) {
   const routerNavigate = useNavigate();
 
@@ -26,15 +28,29 @@ function BlogPostCard({
   }, [id, routerNavigate]);
 
   return (
-    <div className="Post-card" onClick={onClickPostCard}>
-      <img src={thumbnailUrl} alt={`${title}_thumbnail`} />
-      <div className="Card-content">
-        <h3>{title}</h3>
-        <div>
-          {getFormattedDate(creationDate)} · {estimatedTimeToRead}min
-        </div>
+    <article className="Post-card" onClick={onClickPostCard}>
+      <img
+        className="post-card-image"
+        src={thumbnailUrl}
+        alt={`${title}_thumbnail`}
+      />
+      <div className="post-card-content">
+        <header className="post-card-header">
+          {tagList.map((tag) => (
+            <BlogPostHeaderTagItem tagName={tag.tagName} key={tag.tagId} />
+          ))}
+          <h2 className="post-card-title">{title}</h2>
+        </header>
+        <footer className="post-card-meta">
+          <time className="post-card-meta-data">
+            {getFormattedDate(creationDate)}
+          </time>
+          <span className="post-card-meta-length">
+            {estimatedTimeToRead} min read
+          </span>
+        </footer>
       </div>
-    </div>
+    </article>
   );
 }
 
