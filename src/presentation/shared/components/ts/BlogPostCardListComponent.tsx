@@ -1,15 +1,15 @@
 import '../css/BlogPostCardListComponent.css';
 import { BlogPostCard } from './BlogPostCard';
-import { PostPreview } from '../../../../application/types/PostPreview';
 import {
   LoadState,
   LoadStateConst,
 } from '../../../../application/types/PageState';
 import { useCallback } from 'react';
 import { ErrorPage, ErrorPageProps } from '../../../pages/ts/ErrorPage';
+import { PostHeaderData } from '../../../../application/types/PostHeaderData';
 
 type BlogPostCardListComponentProps = {
-  posts: PostPreview[];
+  posts: PostHeaderData[];
   cardLayout: string;
   refreshState: LoadState;
   appendState: LoadState;
@@ -26,10 +26,10 @@ function BlogPostCardListComponent({
   fetchBoundaryReference,
 }: BlogPostCardListComponentProps) {
   const showBlogCardList = useCallback(
-    (posts: PostPreview[]) => {
+    (posts: PostHeaderData[]) => {
       return (
         <div className={cardLayout}>
-          {posts.map((post: PostPreview) => (
+          {posts.map((post: PostHeaderData) => (
             <BlogPostCard
               id={post.id}
               title={post.title}
