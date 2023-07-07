@@ -28,7 +28,7 @@ function BlogPostCardListComponent({
   const showBlogCardList = useCallback(
     (posts: PostHeaderData[]) => {
       return (
-        <div className={cardLayout + ' post-feed'}>
+        <div className={cardLayout + ' Post-feed'}>
           {posts.map((post: PostHeaderData, idx) => (
             <BlogPostCard
               id={post.id}
@@ -41,9 +41,9 @@ function BlogPostCardListComponent({
               cardSize={
                 idx < 3 && cardLayout === 'HomeCardLayout'
                   ? idx === 0
-                    ? 'large'
-                    : 'medium'
-                  : 'small'
+                    ? 'Large'
+                    : 'Medium'
+                  : 'Small'
               }
             />
           ))}

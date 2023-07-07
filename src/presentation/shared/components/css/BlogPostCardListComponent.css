@@ -1,5 +1,10 @@
+/**
+* Copy or variation of .gh-canvas > * style of screen.css.
+* Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L1090
+*/
+
 @media (min-width: 1001px) {
-  .large {
+  .Large {
     grid-column: span 3 !important;
     grid-row: span 2;
     display: grid;
@@ -7,60 +12,70 @@
     border-top: 0;
   }
 
-  .post-feed {
-    position: relative;
-    display: grid;
-    gap: 4.8vmin 4vmin;
-    grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: 1fr;
-    padding: max(4.8vmin, 36px) 0 0;
-  }
-
-  @media (max-width: 991px) {
-    .post-feed {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .post-feed {
-      grid-template-columns: 1fr;
-      grid-gap: 40px;
-    }
-  }
-
-  .large .postCard-image {
+  .Large .PostCard-image {
     position: relative;
     width: 100%;
     height: 75%;
   }
 
-  .large .post-card-tags {
+  .Large .PostCard-tags {
     margin-bottom: 12px;
   }
 
-  .large .post-card-title {
+  .Large .PostCard-title {
     margin-top: 0;
     font-size: 4.4rem;
     line-height: 1.05;
   }
 
-  .post-card.medium {
+  .post-card.Medium {
     grid-column: span 3;
   }
 
-  .post-card.medium .post-card-title {
+  .post-card.Medium .PostCard-title {
     font-size: 3rem;
   }
 
-  .medium .post-card-image {
+  .Medium .PostCard-image {
     position: relative;
     width: 100%;
     height: 45%;
   }
 }
 
-.post-card-content {
+/**
+* Copy or variation of .gh-canvas > * style of screen.css.
+* Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L841
+*/
+
+.Post-feed {
+  position: relative;
+  display: grid;
+  gap: 4.8vmin 4vmin;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 1fr;
+  padding: max(4.8vmin, 36px) 0 0;
+}
+
+@media (max-width: 991px) {
+  .Post-feed {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .Post-feed {
+    grid-template-columns: 1fr;
+    grid-gap: 40px;
+  }
+}
+
+/**
+* Copy or variation of .gh-canvas > * style of screen.css.
+* Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L998
+*/
+
+.PostCard-Content {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
