@@ -1,3 +1,5 @@
+import '../css/BlogPostCard.css';
+
 import { getFormattedDate } from '../../utils/PostUtils';
 import { useNavigate } from 'react-router-dom';
 import { useCallback } from 'react';
@@ -11,6 +13,7 @@ type BlogPostCardProps = {
   estimatedTimeToRead: number;
   thumbnailUrl: string;
   tagList: Tag[];
+  cardSize: string;
 };
 
 function BlogPostCard({
@@ -20,6 +23,7 @@ function BlogPostCard({
   estimatedTimeToRead,
   thumbnailUrl,
   tagList,
+  cardSize,
 }: BlogPostCardProps) {
   const routerNavigate = useNavigate();
 
@@ -28,7 +32,7 @@ function BlogPostCard({
   }, [id, routerNavigate]);
 
   return (
-    <article className="Post-card" onClick={onClickPostCard}>
+    <article className={'post-card ' + cardSize} onClick={onClickPostCard}>
       <img
         className="post-card-image"
         src={thumbnailUrl}
