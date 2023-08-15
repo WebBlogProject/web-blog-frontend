@@ -33,7 +33,7 @@ function BlogPostCard({
   }, [id, routerNavigate]);
 
   return (
-    <article className={'post-card ' + cardType} onClick={onClickPostCard}>
+    <article className={'PostCard ' + cardType} onClick={onClickPostCard}>
       <img
         className="PostCard-image"
         src={thumbnailUrl}

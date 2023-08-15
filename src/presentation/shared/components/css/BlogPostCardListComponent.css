@@ -28,11 +28,11 @@
     line-height: 1.05;
   }
 
-  .post-card.Medium {
+  .PostCard.Medium {
     grid-column: span 3;
   }
 
-  .post-card.Medium .PostCard-title {
+  .PostCard.Medium .PostCard-title {
     font-size: 3rem;
   }
 

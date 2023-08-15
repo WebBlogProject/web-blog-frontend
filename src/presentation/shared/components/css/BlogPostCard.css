@@ -2,7 +2,7 @@
 * Copy or variation of .gh-canvas > * style of screen.css.
 * Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L866
 */
-.post-card {
+.PostCard {
   position: relative;
   grid-column: span 2;
   display: flex;
