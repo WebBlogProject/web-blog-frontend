@@ -7,10 +7,11 @@ import {
 import { useCallback } from 'react';
 import { ErrorPage, ErrorPageProps } from '../../../pages/ts/ErrorPage';
 import { PostHeaderData } from '../../../../application/types/PostHeaderData';
+import { BlogCardType } from '../../../../application/types/BlogCardType';
 
 type BlogPostCardListComponentProps = {
   posts: PostHeaderData[];
-  cardLayout: string;
+  cardTypeGetter: (index: number) => BlogCardType;
   refreshState: LoadState;
   appendState: LoadState;
   errorPageProps: ErrorPageProps;
@@ -19,7 +20,7 @@ type BlogPostCardListComponentProps = {
 
 function BlogPostCardListComponent({
   posts,
-  cardLayout,
+  cardTypeGetter,
   refreshState,
   appendState,
   errorPageProps,
@@ -28,7 +29,7 @@ function BlogPostCardListComponent({
   const showBlogCardList = useCallback(
     (posts: PostHeaderData[]) => {
       return (
-        <div className={cardLayout + ' Post-feed'}>
+        <div className="Post-feed">
           {posts.map((post: PostHeaderData, idx) => (
             <BlogPostCard
               id={post.id}
@@ -38,19 +39,13 @@ function BlogPostCardListComponent({
               thumbnailUrl={post.thumbnailUrl}
               key={post.id}
               tagList={post.tagList}
-              cardSize={
-                idx < 3 && cardLayout === 'HomeCardLayout'
-                  ? idx === 0
-                    ? 'Large'
-                    : 'Medium'
-                  : 'Small'
-              }
+              cardType={cardTypeGetter(idx)}
             />
           ))}
         </div>
       );
     },
-    [cardLayout]
+    [cardTypeGetter]
   );
 
   const showFooterLoadingSpinner = useCallback((appendState: LoadState) => {

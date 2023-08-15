@@ -16,6 +16,7 @@ import {
   searchPostHeaderPageLoadFail,
   searchPostHeaderPageLoading,
 } from '../../../../application/redux/searchResult/searchResultSlice';
+import { BlogCardType } from '../../../../application/types/BlogCardType';
 
 function BlogSearchResultPage() {
   const dispatch = useAppDispatch();
@@ -47,6 +48,10 @@ function BlogSearchResultPage() {
     }
   }, [stateQuery, query, dispatch, resetIntersectingState]);
 
+  const getCardTypebyIndex = useCallback(() => {
+    return BlogCardType.SMALL_CARD;
+  }, []);
+
   const errorPageProps: ErrorPageProps = useMemo(() => {
     return {
       msg: '검색에 실패했습니다.',
@@ -58,7 +63,7 @@ function BlogSearchResultPage() {
       <KeywordPresenter keyword={query} />
       <BlogPostCardListComponent
         posts={searchResult.pageState.posts}
-        cardLayout="SearchResultCardLayout"
+        cardTypeGetter={getCardTypebyIndex}
         refreshState={searchResult.pageState.refreshState}
         appendState={searchResult.pageState.appendState}
         errorPageProps={errorPageProps}
