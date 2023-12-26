@@ -1,16 +1,17 @@
 import '../css/BlogPostCardListComponent.css';
 import { BlogPostCard } from './BlogPostCard';
-import { PostPreview } from '../../../../application/types/PostPreview';
 import {
   LoadState,
   LoadStateConst,
 } from '../../../../application/types/PageState';
 import { useCallback } from 'react';
 import { ErrorPage, ErrorPageProps } from '../../../pages/ts/ErrorPage';
+import { PostHeaderData } from '../../../../application/types/PostHeaderData';
+import { BlogCardType } from '../../../../application/types/BlogCardType';
 
 type BlogPostCardListComponentProps = {
-  posts: PostPreview[];
-  cardLayout: string;
+  posts: PostHeaderData[];
+  cardTypeGetter: (index: number) => BlogCardType;
   refreshState: LoadState;
   appendState: LoadState;
   errorPageProps: ErrorPageProps;
@@ -19,17 +20,17 @@ type BlogPostCardListComponentProps = {
 
 function BlogPostCardListComponent({
   posts,
-  cardLayout,
+  cardTypeGetter,
   refreshState,
   appendState,
   errorPageProps,
   fetchBoundaryReference,
 }: BlogPostCardListComponentProps) {
   const showBlogCardList = useCallback(
-    (posts: PostPreview[]) => {
+    (posts: PostHeaderData[]) => {
       return (
-        <div className={cardLayout}>
-          {posts.map((post: PostPreview) => (
+        <div className="Post-feed">
+          {posts.map((post: PostHeaderData, idx) => (
             <BlogPostCard
               id={post.id}
               title={post.title}
@@ -37,12 +38,14 @@ function BlogPostCardListComponent({
               estimatedTimeToRead={post.estimatedTimeToRead}
               thumbnailUrl={post.thumbnailUrl}
               key={post.id}
+              tagList={post.tagList}
+              cardType={cardTypeGetter(idx)}
             />
           ))}
         </div>
       );
     },
-    [cardLayout]
+    [cardTypeGetter]
   );
 
   const showFooterLoadingSpinner = useCallback((appendState: LoadState) => {

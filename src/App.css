@@ -33,6 +33,15 @@
 }
 
 /**
+* Copy or variation of .gh-canvas > * style of screen.css.
+* Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L77
+*/
+.BlogMain {
+  padding: 0 max(15vmin, 20px);
+  position: relative;
+}
+
+/**
 * Copy of :root style of screen.css.
 * Original file: https://github.com/TryGhost/Casper/blob/main/assets/css/screen.css#L31
 */

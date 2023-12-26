@@ -19,7 +19,9 @@ const BlogMainLayout = () => {
   return (
     <>
       <BlogHeader />
-      <Outlet />
+      <main className="BlogMain">
+        <Outlet />
+      </main>
     </>
   );
 };

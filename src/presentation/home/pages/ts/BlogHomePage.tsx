@@ -1,8 +1,6 @@
 import { BlogPostCardListComponent } from '../../../shared/components/ts/BlogPostCardListComponent';
-import { convertToPostPreview } from '../../../../application/mappers/postHeaderMappers';
 import { useLazyGetPostHeadersQuery } from '../../../../application/redux/api/apiSlice';
 import { useCallback, useMemo } from 'react';
-import { PostPreview } from '../../../../application/types/PostPreview';
 import { useFetchPages } from '../../../shared/hooks/useFetchPages';
 import { ErrorPageProps } from '../../../pages/ts/ErrorPage';
 import {
@@ -11,6 +9,7 @@ import {
   postHeaderPageLoading,
 } from '../../../../application/redux/home/homeSlice';
 import { useAppSelector } from '../../../shared/hooks/reduxHooks';
+import { BlogCardType } from '../../../../application/types/BlogCardType';
 
 function BlogHomePage() {
   const homeResult = useAppSelector((state) => state.home);
@@ -27,9 +26,17 @@ function BlogHomePage() {
     homeResult.nextPage
   );
 
-  const posts: PostPreview[] = useMemo(() => {
-    return homeResult.posts.map(convertToPostPreview) ?? [];
-  }, [homeResult]);
+  const getCardTypebyIndex = useCallback((index: number) => {
+    switch (index) {
+      case 0:
+        return BlogCardType.LARGE_CARD;
+      case 1:
+      case 2:
+        return BlogCardType.MEDIUM_CARD;
+      default:
+        return BlogCardType.SMALL_CARD;
+    }
+  }, []);
 
   const errorPageProps: ErrorPageProps = useMemo(() => {
     return {
@@ -39,8 +46,8 @@ function BlogHomePage() {
 
   return (
     <BlogPostCardListComponent
-      posts={posts}
-      cardLayout="HomeCardLayout"
+      posts={homeResult.posts}
+      cardTypeGetter={getCardTypebyIndex}
       refreshState={homeResult.refreshState}
       appendState={homeResult.appendState}
       errorPageProps={errorPageProps}

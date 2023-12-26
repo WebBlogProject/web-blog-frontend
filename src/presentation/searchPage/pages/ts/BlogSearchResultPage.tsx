@@ -1,6 +1,4 @@
 import { useSearchParams } from 'react-router-dom';
-import { convertToPostPreview } from '../../../../application/mappers/postHeaderMappers';
-import { PostPreview } from '../../../../application/types/PostPreview';
 import { useCallback, useEffect, useMemo } from 'react';
 import { BlogPostCardListComponent } from '../../../shared/components/ts/BlogPostCardListComponent';
 import { KeywordPresenter } from '../../components/ts/KeywordPresenter';
@@ -18,6 +16,7 @@ import {
   searchPostHeaderPageLoadFail,
   searchPostHeaderPageLoading,
 } from '../../../../application/redux/searchResult/searchResultSlice';
+import { BlogCardType } from '../../../../application/types/BlogCardType';
 
 function BlogSearchResultPage() {
   const dispatch = useAppDispatch();
@@ -49,9 +48,9 @@ function BlogSearchResultPage() {
     }
   }, [stateQuery, query, dispatch, resetIntersectingState]);
 
-  const posts: PostPreview[] = useMemo(() => {
-    return searchResult.pageState.posts.map(convertToPostPreview) ?? [];
-  }, [searchResult]);
+  const getCardTypebyIndex = useCallback(() => {
+    return BlogCardType.SMALL_CARD;
+  }, []);
 
   const errorPageProps: ErrorPageProps = useMemo(() => {
     return {
@@ -63,8 +62,8 @@ function BlogSearchResultPage() {
     <div>
       <KeywordPresenter keyword={query} />
       <BlogPostCardListComponent
-        posts={posts}
-        cardLayout="SearchResultCardLayout"
+        posts={searchResult.pageState.posts}
+        cardTypeGetter={getCardTypebyIndex}
         refreshState={searchResult.pageState.refreshState}
         appendState={searchResult.pageState.appendState}
         errorPageProps={errorPageProps}
